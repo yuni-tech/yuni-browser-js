@@ -25,7 +25,7 @@
 
 1. 打开chrome的扩展程序管理器：chrome://extensions/
 2. 右上角开启`开发者模式`
-3. 点击`加载已解压的扩展程序`
+3. 点击`加载已解压的扩展程序`
 4. 定位到`local/path/to/yuni-browser-js/chrome-dev-plugin`
 
 > 到这里准备工作完成
@@ -116,7 +116,7 @@ YNBrowser.save([{
 
 参数说明：
 * selector：css选择器，比如：.cn-bing .image-container
-* callback: 当有相应的元素出现时会调用，第一参数为对应的元素
+* callback: 当有相应的元素出现时会调用，第一参数为对应的元素
 
 Code: 
 
@@ -157,8 +157,8 @@ YNBrowser.showSaveButton(elt, {
 显示保存popup
 
 参数说明:
-options.title: 可选，要显示的提示文案
-options.items: 要保存的内容，与`YNBrowser.save(options)`中的options参数一致
+* options.title: 可选，要显示的提示文案
+* options.items: 要保存的内容，与`YNBrowser.save(options)`中的options参数一致
 
 ```js
 YNBrowser.showSavePopup({
