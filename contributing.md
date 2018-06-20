@@ -15,7 +15,7 @@
 4. 等待我们的审核，审核通过后会进行合并
 
 
-### 编写代码前准备
+### 编写代码前的准备
 
 1. git clone zzmingo/yuni-browser-js
 2. cd local/path/to/yuni-browser-js
