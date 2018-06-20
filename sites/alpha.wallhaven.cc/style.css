@@ -1,0 +1,19 @@
+/*下载工具区*/
+.yuni-download-tool {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  z-index: 10000;
+}
+
+/*下载按钮*/
+.yuni-download-btn {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 30px;
+  margin: 0 auto;
+  font-size: 13px;
+  border-radius: 2em;
+  color: #FFF;
+  background-color: #1B9AF1;
+}

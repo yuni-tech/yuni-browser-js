@@ -1,0 +1,60 @@
+/*图片热搜榜*/
+
+html {
+    height: 100%;
+    /*关键代码*/
+}
+
+.waterfallCard .waterfallCon .waterfallLeft>a,
+.waterfallCard .waterfallCon .waterfallRight>a {
+    position: relative;
+}
+
+
+/*图片热搜榜 end*/
+
+
+/*今日摄影师*/
+
+.photographer .photographer-swiper .photographer-container .img-list .img-container {
+    position: relative;
+}
+
+.mediacyheader,
+.mediacytoolbar,
+.mediacy-rs-contain,
+.mediacyRsShutdown,
+.ec_textlink_container,
+.sfc-image-content-mediacy-slider-toolbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    z-index: -10;
+}
+
+.yuni-down-one.bottom105 {
+    bottom: 105px;
+}
+
+.water-list .items>a.img {
+    position: relative;
+}
+
+.yuni-down-two.small {
+    height: 20px;
+    width: 50px;
+}
+
+.c-gap-bottom-large,
+.sfc-image-content-waterfall .sfc-image-content-resutl-tpl-sets-top,
+.sfc-image-content-waterfall .sfc-image-content-tpl-sets-bottom-left,
+.sfc-image-content-waterfall .sfc-image-content-tpl-sets-bottom-right,
+.sfc-image-content-resutl-tpl-sets .sfc-image-content-resutl-tpl-sets-left,
+.sfc-image-content-resutl-tpl-sets .sfc-image-content-resutl-tpl-sets-right-top,
+.sfc-image-content-resutl-tpl-sets .sfc-image-content-resutl-tpl-sets-right-bot {
+    position: relative;
+}
+
+.b-scene-totop {
+    z-index: 100;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "yuni-browser-js",
+  "version": "1.0.0",
+  "description": "yuni browser js",
+  "main": "inject.js",
+  "scripts": {
+    "serve": "node serve.js",
+    "compile": "node tools/merge-source.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.uneed.com:mobile/yuni-browser-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}

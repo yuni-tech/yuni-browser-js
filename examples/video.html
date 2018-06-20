@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html style="font-size: 100%;">
+<head>
+    <meta charset="utf-8" />
+    <title>视频Demo | 与你浏览器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="alternate icon" type="image/png" href="https://www.uneed.com/source/img/logo.png">
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+      }
+      body, div, img {
+        box-sizing: border-box;
+      }
+      video {
+        width: 60%;
+        display: inline-block;
+      }
+      .single-image {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: #444444;
+        text-align: center;
+      }
+      .center {
+        position: relative;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+    </style>
+</head>
+<body>
+    <div class="single-image">
+      <div class="center">
+          <video class="player" src="assets/video.mp4" poster="https://p3.pstatp.com/large/86b00012deac4dcbfa1a.jpg" type="video/mp4" controls="controls"></video>
+      </div>
+    </div>
+</body>
+</html>

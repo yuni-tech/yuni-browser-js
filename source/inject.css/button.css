@@ -1,0 +1,46 @@
+/* 保存按钮 */
+.yn-btn-save {
+  background: url('data:image/png;base64,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') no-repeat;
+  background-size: 100% 100%;
+  z-index: 99;
+  outline: none;
+}
+
+.yn-btn-save.normal {
+  width: 75px;
+  height: 30px;
+}
+
+.yn-btn-save.small {
+  width: 50px;
+  height: 20px;
+}
+
+.yn-btn-save.large {
+  width: 100px;
+  height: 40px;
+}
+
+.yn-btn-save.left-top {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.yn-btn-save.right-top {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.yn-btn-save.left-bottom {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}
+
+.yn-btn-save.right-bottom {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
