@@ -112,7 +112,7 @@ YNBrowser.save([{
 
 ### YNBrowser.track(selector, callback)
 
-跟踪某些元素的出现，如果已经出现立即调用 callback
+跟踪某些元素的出现，如果已经出现立即调用 callback
 
 参数说明：
 * selector：css选择器，比如：.cn-bing .image-container
