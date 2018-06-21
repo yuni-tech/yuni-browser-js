@@ -266,6 +266,7 @@
                       var t = e;
                       return (
                           Array.isArray(e) && (t = { items: e }),
+                          console.log(t),
                           this.native.callNative({
                               module: "Browser",
                               method: "download",
@@ -673,7 +674,7 @@
                     items.push({
                         url: item
                     })
-                    return
+                    continue
                 }
                 if (!item.url) {
                     console.error('调用 YNBrowser.save 时出错：其中有元素的url为空')
@@ -689,9 +690,7 @@
                 }
                 items.push(item)
             }
-            JSBridge.Browser.download({
-                items: options
-            })
+            JSBridge.Browser.download(items)
         }
         else if (typeof options === 'object') {
             if (!options.url) {
