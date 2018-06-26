@@ -266,7 +266,6 @@
                       var t = e;
                       return (
                           Array.isArray(e) && (t = { items: e }),
-                          console.log(t),
                           this.native.callNative({
                               module: "Browser",
                               method: "download",
@@ -663,6 +662,7 @@
     }
 
     YNBrowser.save = function(options) {
+        console.log(options)
         if (typeof options === 'string') {
             JSBridge.Browser.download({ url: options })
         }
@@ -851,7 +851,7 @@
         var findUrlFunc = null
         if (typeof options.findUrl === 'string') {
           findUrlFunc = function() {
-            return findUrlBySelector(options.findUrl, options.attr)
+            return findUrlBySelector(elt, options.findUrl, options.attr)
           }
         } else if (typeof options.findUrl === 'function') {
           findUrlFunc = options.findUrl
@@ -860,6 +860,9 @@
         }
         var url = findUrlFunc(elt)
         if (url) {
+          if( url.startsWith('//') ){
+            url = 'http:' + url;
+          }
           YNBrowser.save(url)
         }
       })
@@ -875,8 +878,9 @@
     }
   }
 
-  function findUrlBySelector(selector, attr) {
-    return findUrlDefault($(selector)[0], attr)
+  function findUrlBySelector(elt, selector, attr) {
+    //return findUrlDefault($(selector)[0], attr)
+    return findUrlDefault(elt, attr)
   }
 
 })();
