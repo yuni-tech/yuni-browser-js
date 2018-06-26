@@ -64,7 +64,11 @@
 
 做法：让你的开发机子完全信任`certificate/localhost.cer`证书
 
-具体步骤：正在完成中...
+具体步骤(macOS)：
+1. 找到项目中的`certificate/localhost.cer`文件，双击，输入密码，进入钥匙串访问。
+2. 在窗口的左侧栏选中`系统`，左侧栏下方选中`证书`，右侧就会出现本机中的证书列表，找到localhost并双击，进入证书详情。
+3. 进入证书的详情后，展开一个`信任`列表，把 `使用此证书时`设为始终信任。
+
 
 ## 说明
 
@@ -182,6 +186,50 @@ YNBrowser.showSavePopup({
 
 ```js
 YNBrowser.showOptimizedTips("网站已优为适合移动设备")
+```
+
+## 高级API
+
+高级API基于上面的API提供更方便的一键式调用
+
+### YNBrowser.auto.trackSingleImage(selector)
+
+在单图页面，自动跟踪指定图片，并显示底部下载保存界面
+
+参数说明：
+* selector: img标签的选择器
+
+```js
+YNBrowser.auto.trackSingleImage('.content .center .large-img')
+```
+
+### YNBrowser.auto.trackSingleVideo(selector)
+
+在单图页面，自动跟踪指定图片，并显示底部下载保存界面
+
+参数说明：
+* selector: video标签的选择器
+
+```js
+YNBrowser.auto.trackSingleVideo('.video-container > .main-video')
+```
+
+### YNBrowser.auto.trackMultipleImages(options)
+
+在多图页面，自动跟踪指定的某些图片，并显示保存按钮
+
+参数说明：
+* options: 参数对象
+* options.selector 跟踪哪些元素
+* options.findUrl {String/Function} 如果查找有图片url的元素，通常是指如何找img标签
+* options.attr 通过findUrl查找到的元素，取哪一个属性的值作为url，如果是img标签，通常是src
+
+```js
+YNBrowser.auto.trackMultipleImages({
+  selector: '.cell',
+  findUrl: 'img', // optinal
+  attr: 'src' // optional
+})
 ```
 
 

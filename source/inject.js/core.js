@@ -139,6 +139,7 @@
     }
 
     YNBrowser.save = function(options) {
+        console.log(options)
         if (typeof options === 'string') {
             JSBridge.Browser.download({ url: options })
         }
