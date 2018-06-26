@@ -184,4 +184,48 @@ YNBrowser.showSavePopup({
 YNBrowser.showOptimizedTips("网站已优为适合移动设备")
 ```
 
+## 高级API
+
+高级API基于上面的API提供更方便的一键式调用
+
+### YNBrowser.auto.trackSingleImage(selector)
+
+在单图页面，自动跟踪指定图片，并显示底部下载保存界面
+
+参数说明：
+* selector: img标签的选择器
+
+```js
+YNBrowser.auto.trackSingleImage('.content .center .large-img')
+```
+
+### YNBrowser.auto.trackSingleVideo(selector)
+
+在单图页面，自动跟踪指定图片，并显示底部下载保存界面
+
+参数说明：
+* selector: video标签的选择器
+
+```js
+YNBrowser.auto.trackSingleVideo('.video-container > .main-video')
+```
+
+### YNBrowser.auto.trackMultipleImages(options)
+
+在多图页面，自动跟踪指定的某些图片，并显示保存按钮
+
+参数说明：
+* options: 参数对象
+* options.selector 跟踪哪些元素
+* options.findUrl {String/Function} 如果查找有图片url的元素，通常是指如何找img标签
+* options.attr 通过findUrl查找到的元素，取哪一个属性的值作为url，如果是img标签，通常是src
+
+```js
+YNBrowser.auto.trackMultipleImages({
+  selector: '.cell',
+  findUrl: 'img', // optinal
+  attr: 'src' // optional
+})
+```
+
 

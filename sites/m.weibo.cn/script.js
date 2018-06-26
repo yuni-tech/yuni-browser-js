@@ -23,8 +23,12 @@ function appendDownloadBtn(type, selector,pasrams, savedatas, title, onClick) {
             urlTag.each(function(index, item) {
                 var url='',desc='';
                 var tag=jQuery(item).find('.f-bg-img').css("backgroundImage");
+                tag = /^url\((['"]?)(.*)\1\)$/.exec(tag);
+                tag = tag ? tag[2] : "";
+                console.log('背景url',tag);
                 // orj360   large
-                url = tag.substring(5, tag.length - 2).replace(/\/orj360\//,'/large/');
+                // url = tag.substring(5, tag.length - 2).replace(/\/orj360\//,'/large/'); 
+                url = tag.replace(/\/orj360\//,'/large/'); 
                 desc=jQuery('.weibo-text').text();
                 savedatas.push({url:url,desc:desc});
             });
