@@ -140,7 +140,7 @@
 
     YNBrowser.save = function(options) {
         console.log(options)
-        if (typeof options === 'string') {
+        if (typeof options === 'string') {//单图下载无desc
             JSBridge.Browser.download({ url: options })
         }
         else if (Object.prototype.toString.call(options) === '[object Array]') {
@@ -178,7 +178,7 @@
                 console.error('调用 YNBrowser.save 时出错：url不是string类型')
                 return
             }
-            if (options.desc && typeof options.desc) {
+            if (options.desc && typeof options.desc !== "string") {
                 console.error('调用 YNBrowser.save 时出错：desc不是string类型')
                 return
             }
