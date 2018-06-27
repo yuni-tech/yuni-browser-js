@@ -59,7 +59,7 @@ function appendDownloadBtnOne(type, selector, pasrams, savedatas, title, onClick
             var imgTag=jQuery(item).find('img.pswp__img').not('.pswp__img--placeholder')
             if((getTransform(jQuery(item))==stylePar||getTransform(jQuery(item))==-stylePar)&&imgTag.length){
                 url=imgTag[0].src;
-                desc=jQuery('.weibo-text').text();
+                // desc=jQuery('.weibo-text').text();
             }
         })
         savedatas=[{url:url,desc:desc}];
@@ -117,9 +117,7 @@ function addTips(type,selector,child,title){
             }
             return;
         }
-        // if(childHas){
-            jQuery(YNBrowser.tipHtml(title)).appendTo(elements);
-        // }
+        jQuery(YNBrowser.tipHtml(title)).appendTo(elements);
     })
 }
 
