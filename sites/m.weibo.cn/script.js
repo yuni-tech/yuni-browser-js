@@ -25,8 +25,7 @@ function appendDownloadBtn(type, selector,pasrams, savedatas, title, onClick) {
                 var tag=jQuery(item).find('.f-bg-img').css("backgroundImage");
                 tag = /^url\((['"]?)(.*)\1\)$/.exec(tag);
                 tag = tag ? tag[2] : "";
-                console.log('背景url',tag);
-                // orj360   large
+                // orj360--缩略图   large--原图
                 // url = tag.substring(5, tag.length - 2).replace(/\/orj360\//,'/large/'); 
                 url = tag.replace(/\/orj360\//,'/large/'); 
                 desc=jQuery('.weibo-text').text();
@@ -59,6 +58,9 @@ function appendDownloadBtnOne(type, selector, pasrams, savedatas, title, onClick
             var imgTag=jQuery(item).find('img.pswp__img').not('.pswp__img--placeholder')
             if((getTransform(jQuery(item))==stylePar||getTransform(jQuery(item))==-stylePar)&&imgTag.length){
                 url=imgTag[0].src;
+                if(!jQuery(document).find('.wb-item-wrap').length){
+                    desc=jQuery('.weibo-text').text();
+                }
                 // desc=jQuery('.weibo-text').text();
             }
         })
@@ -85,7 +87,7 @@ function appendDownloadBtnOne(type, selector, pasrams, savedatas, title, onClick
 }
 //视频文件
 function appendBtnToVideo(type, selector,title, pasrams, savedatas,  onClick){
-    var htmlTag, className = YNBrowser.addClassName(type); //要添加的元素 class名称
+    var htmlTag, className = YNBrowser.addClassName(type),desc=''; //要添加的元素 class名称
     YNBrowser.trackDOMElements(selector, function(elements) {
         if(jQuery(elements).find(className).length){
             return
@@ -95,22 +97,20 @@ function appendBtnToVideo(type, selector,title, pasrams, savedatas,  onClick){
         }
         //有video
         var videoUrl=jQuery(elements).find('video')[0].src
-        var desc=jQuery('.weibo-text').text();
+        if(!jQuery(document).find('.wb-item-wrap').length){
+            desc=jQuery('.weibo-text').text();
+        }
         savedatas=[{url:videoUrl,desc:desc}]
         htmlTag = YNBrowser.showDownloadBtns(type, pasrams, savedatas, title, onClick); //添加元素
         jQuery(htmlTag).appendTo(elements);
         savedatas=[];
     })
 }
-function addTips(type,selector,child,title){
+function addTips(selector,child,title){
     YNBrowser.trackDOMElements(selector, function(elements) {
         var hasTip=jQuery(elements).find('.yuni-down-tip').length
         var childHas;
-        if(type==2){
-            childHas=jQuery(elements).find(child[0]).length&&jQuery(elements).find(child[1]).length;
-        }else if(type==1){
-            childHas=jQuery(elements).find(child).length;
-        }
+        childHas=jQuery(elements).find(child[0]).length&&jQuery(elements).find(child[1]).length;
         if(hasTip){
             if(!childHas){
                 jQuery(elements).remove('.yuni-down-tip')
@@ -121,8 +121,7 @@ function addTips(type,selector,child,title){
     })
 }
 
-addTips(2,'#app',['.profile-header','.wb-item-wrap'])
-addTips(1,'.lite-page-wrap','.card-video','页面已优化,点击视频保存至相册')
+addTips('#app',['.profile-header','.wb-item-wrap'])
 
 appendDownloadBtn(3, '.lite-page-wrap');//九宫格
 appendDownloadBtnOne(1, '.pswp');//大图
