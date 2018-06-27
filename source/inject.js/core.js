@@ -161,7 +161,7 @@
                     console.error('调用 YNBrowser.save 时出错：其中有元素的url不是string类型')
                     return
                 }
-                if (item.desc && typeof item.desc) {
+                if (item.desc && typeof item.desc !== "string") {
                     console.error('调用 YNBrowser.save 时出错：其中有元素的desc不是string类型')
                     return
                 }
