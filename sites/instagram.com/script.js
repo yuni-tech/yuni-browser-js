@@ -69,8 +69,8 @@ YNBrowser.ready(function() {
     // 单张图 https://www.instagram.com/p/Bj9w3BTHawn/
     YNBrowser.track('._9eogI.E3X2T', function(elt) {
       if(!jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length){
-        if(jQuery('.yn-popup-layer.yn-optimized-tips').length){
-          jQuery('.yn-popup-layer.yn-optimized-tips').remove()
+        if(jQuery('.yn-optimized-tips').length){
+          jQuery('.yn-optimized-tips').remove()
         }
         YNBrowser.showSaveButton('.eLAPa.kPFhm>.KL4Bh', {
           onClick: function() {
