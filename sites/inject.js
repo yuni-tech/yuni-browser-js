@@ -1,6 +1,5 @@
 
-
-/* global define */
+/* global define */
 (function (root, factory) {
   window.YNBrowser = window.YNBrowser || {};
   YNBrowser.compareVersion = factory();
@@ -69,8 +68,7 @@
   };
 
 }));
-
-/* JSBridge */
+/* JSBridge */
 
 !(function(e) {
   var t = {};
@@ -523,8 +521,7 @@
   }
 ]);
 
-
-/**
+/**
  * 这里是inject.js 核心代码部分，主要完成以下事情：
  * 1. 加载jquery.js
  * 2. 同时加载匹配的css/js
@@ -666,7 +663,7 @@
 
     YNBrowser.save = function(options) {
         console.log(options)
-        if (typeof options === 'string') {
+        if (typeof options === 'string') {//单图下载无desc
             JSBridge.Browser.download({ url: options })
         }
         else if (Object.prototype.toString.call(options) === '[object Array]') {
@@ -687,7 +684,7 @@
                     console.error('调用 YNBrowser.save 时出错：其中有元素的url不是string类型')
                     return
                 }
-                if (item.desc && typeof item.desc!== "string") {
+                if (item.desc && typeof item.desc !== "string") {
                     console.error('调用 YNBrowser.save 时出错：其中有元素的desc不是string类型')
                     return
                 }
@@ -713,8 +710,7 @@
     }
 
 })();
-
-/**
+/**
  * 这里写一些针对dom元素解析和监听的通用作法
  */
 (function() {
@@ -813,21 +809,17 @@
         $div.addClass('right-top')
     }
     $div.click(function() {
-        event.stopPropagation();
-        event.preventDefault();
       console.info('与你浏览器：点击了保存')
       onClick()
     });
-    jQuery($div[0]).appendTo(elt);
-    // elt.appendChild($div[0])--会报错
+    elt.appendChild($div[0])
     jQuery(document).on('DOMNodeRemoved', '#' + uuid, function() {
         showDownloadBtn(elt, options, onClick)
     })
   }
 
 })();
-
-/**
+/**
  * 这里编写一些高级用法，可以快速完成一套动作（跟踪/查找url/显示下载按钮/显示popup)
  */
 (function() {
@@ -892,8 +884,7 @@
   }
 
 })();
-
-(function() {
+(function() {
 
     // 在这里提供通用的一些检查元素的方法
     function trackDOMElements(selector, callback) {

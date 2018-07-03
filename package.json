@@ -5,7 +5,8 @@
   "main": "inject.js",
   "scripts": {
     "serve": "node serve.js",
-    "compile": "node tools/merge-source.js"
+    "compile": "node tools/merge-source.js",
+    "deploy": "node tools/oss-upload.js"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ali-oss": "^5.3.1",
+    "glob": "^7.1.2",
     "http-server": "^0.11.1"
   }
 }
