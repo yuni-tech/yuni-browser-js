@@ -64,29 +64,49 @@
 // }
 
 YNBrowser.ready(function() {
-  // if (location.pathname.startsWith('/p/')) {
     // 多图 https://www.instagram.com/p/Bjt_vMAhiFy/
     // 单张图 https://www.instagram.com/p/Bj9w3BTHawn/
+    // 单视频 https://www.instagram.com/p/BjpXwUZB2eq/
+    
     YNBrowser.track('._9eogI.E3X2T', function(elt) {
-      if(!jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length){
-        if(jQuery('.yn-optimized-tips').length){
+      if(!jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length&&!jQuery('.Nnq7C.weEfm').length){
+        if(jQuery('.yn-optimized-tips').length){//去除提示
           jQuery('.yn-optimized-tips').remove()
         }
-        YNBrowser.showSaveButton('.eLAPa.kPFhm>.KL4Bh', {
+        var url=''
+        var desc=''
+        YNBrowser.showSaveButton('.eLAPa .KL4Bh', {//图片
           onClick: function() {
-            console.log('是单张图啊');
-              var url=jQuery(elt).find('.KL4Bh>img')[0].src
-              var desc=jQuery(elt).find('.KL4Bh>img')[0].alt;
+              url=jQuery(elt).find('.KL4Bh>img')[0].src||''
+              desc=jQuery(elt).find('.KL4Bh>img')[0].alt||''
               YNBrowser.save({
-                url: url||'',
-                desc: desc||''
+                url: url,
+                desc: desc
               })
           }
         })
-      }else{
+        YNBrowser.showSaveButton('.kPFhm', {//视频
+          onClick: function() {
+            if(jQuery('.kPFhm').find('video')[0].src.indexOf('blob:https://www.instagram.com/')>=0){
+              //blob:https://www.instagram.com/开头的src替换为真正mp4路径
+              if(jQuery(document).find("meta[property='og:video:secure_url']").length){
+                url=jQuery(document).find("meta[property='og:video:secure_url']")[0].content
+              }
+            }else if(jQuery('.kPFhm').find('video')[0].src.indexOf('.mp4')>=0){
+              //src包含MP4路径
+              url=jQuery('.kPFhm').find('video')[0].src
+            }
+            if(jQuery(".gElp9").length&&jQuery(".gElp9 a[title='instagram']").length&&jQuery(".gElp9 span").length){
+              desc=jQuery(".gElp9 span").text();
+            }
+            YNBrowser.save({
+              url: url||'',
+              desc: desc||''
+            })
+          }
+        })
+      }else if(jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length||jQuery('.Nnq7C.weEfm').length){
         YNBrowser.showOptimizedTips("打开帖子保存图片或视频至相册")
       }
     })
-  // }
-  // 单视频 https://www.instagram.com/p/BjpXwUZB2eq/
 })

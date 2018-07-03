@@ -813,6 +813,8 @@
         $div.addClass('right-top')
     }
     $div.click(function() {
+        event.stopPropagation();
+        event.preventDefault();
       console.info('与你浏览器：点击了保存')
       onClick()
     });
