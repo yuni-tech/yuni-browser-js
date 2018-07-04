@@ -132,7 +132,7 @@ YNBrowser.track('.cell', function(elt) {
 
 ### YNBrowser.showSaveButton(elt, options, onClick)
 
-向某个元素添加`与你保存按钮`
+向某个元素添加`与你保存按钮` 为浮在图片上的小按钮
 
 参数说明:
 * elt: 向哪个元素添加保存按钮
@@ -158,7 +158,7 @@ YNBrowser.showSaveButton(elt, {
 
 ### YNBrowser.showSavePopup(options)
 
-显示保存popup
+显示保存popup 为浮在页面底部的大按钮
 
 参数说明:
 * options.title: 可选，要显示的提示文案
