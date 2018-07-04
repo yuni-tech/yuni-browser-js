@@ -106,23 +106,7 @@ function appendBtnToVideo(type, selector,title, pasrams, savedatas,  onClick){
         savedatas=[];
     })
 }
-function addTips(selector,child,title){
-    YNBrowser.trackDOMElements(selector, function(elements) {
-        var hasTip=jQuery(elements).find('.yuni-down-tip').length
-        var childHas;
-        childHas=jQuery(elements).find(child[0]).length&&jQuery(elements).find(child[1]).length;
-        if(hasTip){
-            if(!childHas){
-                jQuery(elements).remove('.yuni-down-tip')
-            }
-            return;
-        }
-        jQuery(YNBrowser.tipHtml(title)).appendTo(elements);
-    })
-}
-
-addTips('#app',['.profile-header','.wb-item-wrap'])
-
+YNBrowser.showOptimizedTips();
 appendDownloadBtn(3, '.lite-page-wrap');//九宫格
 appendDownloadBtnOne(1, '.pswp');//大图
 appendBtnToVideo(1, '.card-video','检测到1个视频文件')

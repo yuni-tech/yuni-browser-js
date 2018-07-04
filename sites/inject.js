@@ -746,7 +746,7 @@
 
   YNBrowser.showOptimizedTips = function(title) {
     jQuery('.yn-popup-layer').remove()
-    title = title || '页面已优化，点击图片或视频保存至相册'
+    title = title || '页面已优化,点击图片或视频保存至相册'
     let tpl = [
       '<div class="yn-popup-layer yn-optimized-tips">',
         '<div class="yn-logo yn-icon"></div>',
@@ -774,13 +774,15 @@
       '</div>'
     ]
     let popup = jQuery(tpl.join(''))
-    popup.find('.yn-btn').on('click', function(e) {
-      console.info('与你浏览器：点击了保存', options.items)
-      if (options.onSaveClick) {
-        options.onSaveClick(options)
-      } else {
-        YNBrowser.save(options.items)
-      }
+    popup.find('.yn-btn').on('click', function() {
+        event.stopPropagation();
+        event.preventDefault();
+        console.info('与你浏览器：点击了保存', options.items)
+        if (options.onSaveClick) {
+            options.onSaveClick(options)
+        } else {
+            YNBrowser.save(options.items)
+        }
     })
     popup.appendTo(document.body)
   }
