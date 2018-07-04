@@ -1,5 +1,6 @@
 
-/* global define */
+
+/* global define */
 (function (root, factory) {
   window.YNBrowser = window.YNBrowser || {};
   YNBrowser.compareVersion = factory();
@@ -68,7 +69,8 @@
   };
 
 }));
-/* JSBridge */
+
+/* JSBridge */
 
 !(function(e) {
   var t = {};
@@ -521,7 +523,8 @@
   }
 ]);
 
-/**
+
+/**
  * 这里是inject.js 核心代码部分，主要完成以下事情：
  * 1. 加载jquery.js
  * 2. 同时加载匹配的css/js
@@ -710,7 +713,8 @@
     }
 
 })();
-/**
+
+/**
  * 这里写一些针对dom元素解析和监听的通用作法
  */
 (function() {
@@ -809,17 +813,21 @@
         $div.addClass('right-top')
     }
     $div.click(function() {
-      console.info('与你浏览器：点击了保存')
-      onClick()
+        event.stopPropagation();
+        event.preventDefault();
+        console.info('与你浏览器：点击了保存')
+        onClick()
     });
-    elt.appendChild($div[0])
+    // elt.appendChild($div[0]) appendChild和append会报方法不存在的错误
+    jQuery($div[0]).appendTo(elt)
     jQuery(document).on('DOMNodeRemoved', '#' + uuid, function() {
         showDownloadBtn(elt, options, onClick)
     })
   }
 
 })();
-/**
+
+/**
  * 这里编写一些高级用法，可以快速完成一套动作（跟踪/查找url/显示下载按钮/显示popup)
  */
 (function() {
@@ -884,7 +892,8 @@
   }
 
 })();
-(function() {
+
+(function() {
 
     // 在这里提供通用的一些检查元素的方法
     function trackDOMElements(selector, callback) {
@@ -922,8 +931,15 @@
     } else {
         $div.addClass('right-top')
     }
-    $div.click(onClick);
-    element.appendChild($div[0])
+    // $div.click(onClick);
+    $div.click(function() {
+        event.stopPropagation();
+        event.preventDefault();
+        console.info('与你浏览器：点击了保存')
+        onClick()
+    });
+    jQuery($div[0]).appendTo(element)
+    // element.appendChild($div[0])
     jQuery(document).on('DOMNodeRemoved', '#' + uuid, function() {
         showDownloadBtn(element, params, onClick)
     })
@@ -940,8 +956,6 @@
   window.YNBrowser.downImg = downImg //下载事件
     //定义为全局调用
   function showDownloadBtns(type, pasrams, savedatas, title, onClick) {
-    // var desc = '测试图片描述';
-    // var savedatas = [{ url: url, desc: desc }, { url: url, desc: desc }];
     var htmlTag = jQuery(document.createElement('div'));
     //url--图片链接
     if (!title) { //单图标题
@@ -956,14 +970,11 @@
         }else if(type==3){
             htmlTag.addClass('yuni-down-all');
         }
-        // htmlTag.append("<i class='yuni-text'>" + title + "</i><section class='yuni-btn-icon' data-url=" + url + " data-savedatas></section>");
         htmlTag.append("<i class='yuni-text'>" + title + "</i><section class='yuni-btn-icon' data-savedatas></section>");
         htmlTag.find('.yuni-btn-icon').data('savedatas', savedatas);
         htmlTag.find('.yuni-btn-icon').on('click', onClick);
     } else if (type == 2) {
         htmlTag.addClass('yuni-down-two');
-        // htmlTag.data('url', url);
-        // htmlTag.data('desc', desc);
         htmlTag.data('savedatas', savedatas);
         htmlTag.on('click', onClick);
     }
