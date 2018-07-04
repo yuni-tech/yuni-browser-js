@@ -43,35 +43,30 @@ function appendDownloadBtnOne(type, selector, pasrams, savedatas, title, onClick
     var htmlTag, className = YNBrowser.addClassName(type); //要添加的元素 class名称
     YNBrowser.trackDOMElements(selector, function(elements) {
         var hasBtn=jQuery(elements).find(className)
-        var ariaNotHidden=jQuery(elements).find('aria-hidden','false');//查看大图时false为显示大图，true为关闭查看大图
-        var pswpHidden=jQuery(elements).find('.pswp__ui--hidden').length;
-        if(pswpHidden){//大图隐藏停止函数执行
+        var ariaNotHidden=(jQuery(elements).attr('aria-hidden'));//查看大图时false为显示大图，true为关闭查看大图
+        if(ariaNotHidden=='true'){//大图隐藏停止函数执行
             return;
         }
         var url='',desc='';
         function getTransform(item){//获取transform判断当前元素url
-            return item.css('transform').replace(/[^0-9\-,]/g,'').split(',')[4];
+            return parseInt(item.css('transform').replace(/[^0-9\-,]/g,'').split(',')[4]);
         }
         var stylePar=getTransform(jQuery(jQuery(elements).find('.pswp__container')[0]))
         var styleChild=jQuery(elements).find('.pswp__item')
         styleChild.each(function(index,item){
+            //找到高清图不是缩略图 '.pswp__img--placeholder'为缩略图
             var imgTag=jQuery(item).find('img.pswp__img').not('.pswp__img--placeholder')
-            if((getTransform(jQuery(item))==stylePar||getTransform(jQuery(item))==-stylePar)&&imgTag.length){
+            if(!url&&(getTransform(jQuery(item))+stylePar)=='0' && imgTag.length){
                 url=imgTag[0].src;
                 if(!jQuery(document).find('.wb-item-wrap').length){
                     desc=jQuery('.weibo-text').text();
                 }
-                // desc=jQuery('.weibo-text').text();
             }
         })
         savedatas=[{url:url,desc:desc}];
         if(hasBtn.length){
-            if(ariaNotHidden){
-                hasBtn.css('display','block');
-                jQuery(elements).find(className+" .yuni-btn-icon").data('savedatas',savedatas);
-            }else if(!ariaNotHidden){
-                hasBtn.css('display','none');
-            }
+            hasBtn.css('display','block');
+            jQuery(elements).find(className+" .yuni-btn-icon").data('savedatas',savedatas);
             return
         }else if(!hasBtn.length){
             if(!title){
@@ -87,7 +82,7 @@ function appendDownloadBtnOne(type, selector, pasrams, savedatas, title, onClick
 }
 //视频文件
 function appendBtnToVideo(type, selector,title, pasrams, savedatas,  onClick){
-    var htmlTag, className = YNBrowser.addClassName(type),desc=''; //要添加的元素 class名称
+    var htmlTag, className = YNBrowser.addClassName(type); //要添加的元素 class名称
     YNBrowser.trackDOMElements(selector, function(elements) {
         if(jQuery(elements).find(className).length){
             return
@@ -97,6 +92,7 @@ function appendBtnToVideo(type, selector,title, pasrams, savedatas,  onClick){
         }
         //有video
         var videoUrl=jQuery(elements).find('video')[0].src
+        var desc=''
         if(!jQuery(document).find('.wb-item-wrap').length){
             desc=jQuery('.weibo-text').text();
         }
