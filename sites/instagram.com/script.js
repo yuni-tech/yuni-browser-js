@@ -107,6 +107,11 @@ YNBrowser.ready(function() {
         })
       }else if(jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length||jQuery('.Nnq7C.weEfm').length){
         YNBrowser.showOptimizedTips("打开帖子保存图片或视频至相册")
+        if(jQuery(document).find('.not-logged-in').length){
+          jQuery('.yn-popup-layer.yn-optimized-tips').css('bottom','0');
+        }else if(jQuery(document).find('.logged-in').length){
+          jQuery('.yn-popup-layer.yn-optimized-tips').css('bottom','43px');
+        }
       }
     })
 })
