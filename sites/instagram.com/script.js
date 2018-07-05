@@ -62,51 +62,64 @@
 //   }
 //   return urls
 // }
-
 YNBrowser.ready(function() {
     // 多图 https://www.instagram.com/p/Bjt_vMAhiFy/
     // 单张图 https://www.instagram.com/p/Bj9w3BTHawn/
     // 单视频 https://www.instagram.com/p/BjpXwUZB2eq/
-    
+    function getCookie(cname){//获取cookies
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0; i<ca.length; i++){
+        var c = ca[i].trim();
+        if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+      }
+      return "";
+    }
+    document.cookie="nowUrl="+window.history.state.state.previousLocation.pathname
     YNBrowser.track('._9eogI.E3X2T', function(elt) {
+      if(window.history.state.state.previousLocation.pathname!=getCookie('nowUrl')){
+        window.location.reload(true);
+      }
       if(!jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length&&!jQuery('.Nnq7C.weEfm').length){
         if(jQuery('.yn-optimized-tips').length){//去除提示
           jQuery('.yn-optimized-tips').remove()
         }
         var url=''
         var desc=''
-        YNBrowser.showSaveButton('.eLAPa .KL4Bh', {//图片
-          onClick: function() {
-              url=jQuery(elt).find('.KL4Bh>img')[0].src||''
-              desc=jQuery(elt).find('.KL4Bh>img')[0].alt||''
-              YNBrowser.save({
-                url: url,
-                desc: desc
-              })
+        var shortcode_media=''
+        var msg=[]
+        if(_sharedData&&_sharedData.entry_data&&_sharedData.entry_data.PostPage){
+          shortcode_media = _sharedData.entry_data.PostPage[0].graphql.shortcode_media
+          console.log(shortcode_media);
+          if(jQuery(".gElp9").length&&jQuery(".gElp9 a[title='instagram']").length&&jQuery(".gElp9 span").length){
+            desc=jQuery(".gElp9 span").text();
           }
-        })
-        YNBrowser.showSaveButton('.kPFhm', {//视频
-          onClick: function() {
-            if(jQuery('.kPFhm').find('video')[0].src.indexOf('blob:https://www.instagram.com/')>=0){
-              //blob:https://www.instagram.com/开头的src替换为真正mp4路径
-              if(jQuery(document).find("meta[property='og:video:secure_url']").length){
-                url=jQuery(document).find("meta[property='og:video:secure_url']")[0].content
+          if(shortcode_media.__typename =='GraphImage'){//单图
+            url=shortcode_media.display_url||''
+            msg={title:'检查到1个图片文件',items: [{url: url,desc: desc}]}
+          }else if(shortcode_media.__typename =='GraphSidecar'){//多图
+            var childSlides=shortcode_media.edge_sidecar_to_children
+            var childSlide=childSlides.edges
+            if(childSlides&&childSlide&&childSlide.length){
+              for(var i=0;i<childSlide.length;i++){
+                url=childSlide[i].node.display_url
+                msg.push({url:url,desc:desc})
               }
-            }else if(jQuery('.kPFhm').find('video')[0].src.indexOf('.mp4')>=0){
-              //src包含MP4路径
-              url=jQuery('.kPFhm').find('video')[0].src
+              msg={title:"检查到"+childSlide.length+"个图片文件",items:msg}
             }
-            if(jQuery(".gElp9").length&&jQuery(".gElp9 a[title='instagram']").length&&jQuery(".gElp9 span").length){
-              desc=jQuery(".gElp9 span").text();
-            }
-            YNBrowser.save({
-              url: url||'',
-              desc: desc||''
-            })
+          }else if(shortcode_media.__typename =='GraphVideo'){
+            url=shortcode_media.video_url||''
+            msg={title:'检查到1个视频文件',items: [{url: url,desc: desc}]}
           }
-        })
+          YNBrowser.showSavePopup(msg)
+        }
       }else if(jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length||jQuery('.Nnq7C.weEfm').length){
         YNBrowser.showOptimizedTips("打开帖子保存图片或视频至相册")
+      }
+      if(jQuery(document).find('.not-logged-in').length){
+        jQuery('.yn-popup-layer').css('bottom','0');
+      }else if(jQuery(document).find('.logged-in').length){
+        jQuery('.yn-popup-layer').css('bottom','43px');
       }
     })
 })
