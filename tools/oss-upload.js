@@ -37,7 +37,7 @@ co(function* () {
     var result = yield client.put(item.name, item.file)
     console.log('upload success: ' + result.name)
   }
-  console.log('upload success')
+  console.log('upload completed !')
 }).catch(function (err) {
   console.error('upload error: ')
   console.error(err)
