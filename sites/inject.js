@@ -766,7 +766,7 @@
 
     jQuery('.yn-popup-layer').remove()
 
-    let title = options.title || (options.items.length > 1 ? "检测到多个文件" : "检查到一个文件")
+    let title = options.title || (options.items.length > 1 ? "检测到"+options.items.length+"个文件" : "检查到1个文件")
     let tpl = [
       '<div class="yn-popup-layer yn-save-popup">',
         '<div class="yn-title">' + title + '</div>',
