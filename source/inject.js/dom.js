@@ -97,10 +97,13 @@
         $div.addClass('right-top')
     }
     $div.click(function() {
+      event.stopPropagation();
+      event.preventDefault();
       console.info('与你浏览器：点击了保存')
       onClick()
     });
-    elt.appendChild($div[0])
+    // elt.appendChild($div[0]) appendChild和append会报方法不存在的错误
+    jQuery($div[0]).appendTo(elt)
     jQuery(document).on('DOMNodeRemoved', '#' + uuid, function() {
         showDownloadBtn(elt, options, onClick)
     })
