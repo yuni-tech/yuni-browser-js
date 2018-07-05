@@ -36,8 +36,15 @@
     } else {
         $div.addClass('right-top')
     }
-    $div.click(onClick);
-    element.appendChild($div[0])
+    // $div.click(onClick);
+    // element.appendChild($div[0])
+    $div.click(function() {
+        event.stopPropagation();
+        event.preventDefault();
+        console.info('与你浏览器：点击了保存')
+        onClick()
+    });
+    jQuery($div[0]).appendTo(element)
     jQuery(document).on('DOMNodeRemoved', '#' + uuid, function() {
         showDownloadBtn(element, params, onClick)
     })
@@ -54,8 +61,6 @@
   window.YNBrowser.downImg = downImg //下载事件
     //定义为全局调用
   function showDownloadBtns(type, pasrams, savedatas, title, onClick) {
-    // var desc = '测试图片描述';
-    // var savedatas = [{ url: url, desc: desc }, { url: url, desc: desc }];
     var htmlTag = jQuery(document.createElement('div'));
     //url--图片链接
     if (!title) { //单图标题
@@ -70,14 +75,11 @@
         }else if(type==3){
             htmlTag.addClass('yuni-down-all');
         }
-        // htmlTag.append("<i class='yuni-text'>" + title + "</i><section class='yuni-btn-icon' data-url=" + url + " data-savedatas></section>");
         htmlTag.append("<i class='yuni-text'>" + title + "</i><section class='yuni-btn-icon' data-savedatas></section>");
         htmlTag.find('.yuni-btn-icon').data('savedatas', savedatas);
         htmlTag.find('.yuni-btn-icon').on('click', onClick);
     } else if (type == 2) {
         htmlTag.addClass('yuni-down-two');
-        // htmlTag.data('url', url);
-        // htmlTag.data('desc', desc);
         htmlTag.data('savedatas', savedatas);
         htmlTag.on('click', onClick);
     }
