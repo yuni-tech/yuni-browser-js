@@ -95,7 +95,7 @@ YNBrowser.ready(function() {
         if(_sharedData&&_sharedData.entry_data&&_sharedData.entry_data.PostPage){
           shortcode_media = _sharedData.entry_data.PostPage[0].graphql.shortcode_media
           if(jQuery(".gElp9").length&&jQuery(".gElp9 a[title='instagram']").length&&jQuery(".gElp9 span").length){
-            desc=jQuery(jQuery(".gElp9")[0]).text()
+            desc=jQuery(jQuery(".gElp9")[0]).text().replace(/instagram/,'instagram  ')
           }
           if(shortcode_media.__typename =='GraphSidecar'){//多图 或多视频，或视频图片混杂
             var childSlides=shortcode_media.edge_sidecar_to_children
