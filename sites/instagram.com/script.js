@@ -75,9 +75,13 @@ YNBrowser.ready(function() {
       }
       return "";
     }
-    document.cookie="nowUrl="+window.history.state.state.previousLocation.pathname
+    if(window.history&&window.history.length){
+      document.cookie="nowUrl="+window.history.length
+    }else{
+      document.cookie="nowUrl=0"
+    }
     YNBrowser.track('._9eogI.E3X2T', function(elt) {
-      if(window.history.state.state.previousLocation.pathname!=getCookie('nowUrl')){
+      if(window.history&&window.history.length&&window.history.length!=getCookie('nowUrl')){
         window.location.reload(true);
       }
       if(!jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length&&!jQuery('.Nnq7C.weEfm').length){
@@ -90,7 +94,6 @@ YNBrowser.ready(function() {
         var msg=[]
         if(_sharedData&&_sharedData.entry_data&&_sharedData.entry_data.PostPage){
           shortcode_media = _sharedData.entry_data.PostPage[0].graphql.shortcode_media
-          console.log(shortcode_media);
           if(jQuery(".gElp9").length&&jQuery(".gElp9 a[title='instagram']").length&&jQuery(".gElp9 span").length){
             desc=jQuery(".gElp9 span").text();
           }
