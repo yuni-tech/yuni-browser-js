@@ -97,7 +97,6 @@ YNBrowser.ready(function() {
           if(jQuery(".gElp9").length&&jQuery(".gElp9 a[title='instagram']").length&&jQuery(".gElp9 span").length){
             desc=jQuery(".gElp9 span").text();
           }
-          console.log(shortcode_media);
           if(shortcode_media.__typename =='GraphSidecar'){//多图 或多视频，或视频图片混杂
             var childSlides=shortcode_media.edge_sidecar_to_children
             var childSlide=childSlides.edges
