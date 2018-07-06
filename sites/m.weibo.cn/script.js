@@ -26,7 +26,6 @@ function appendDownloadBtn(type, selector,pasrams, savedatas, title, onClick) {
                 tag = /^url\((['"]?)(.*)\1\)$/.exec(tag);
                 tag = tag ? tag[2] : "";
                 // orj360--缩略图   large--原图
-                // url = tag.substring(5, tag.length - 2).replace(/\/orj360\//,'/large/'); 
                 url = tag.replace(/\/orj360\//,'/large/'); 
                 desc=jQuery('.weibo-text').text();
                 savedatas.push({url:url,desc:desc});
@@ -35,7 +34,7 @@ function appendDownloadBtn(type, selector,pasrams, savedatas, title, onClick) {
             htmlTag = YNBrowser.showDownloadBtns(type, pasrams, savedatas, title, onClick); //添加元素
             jQuery(htmlTag).appendTo(elements);
         }
-        savedatas =[];
+        url='',desc='',savedatas ='';
     });
 }
 //9宫格查看单张大图
@@ -58,8 +57,10 @@ function appendDownloadBtnOne(type, selector, pasrams, savedatas, title, onClick
             var imgTag=jQuery(item).find('img.pswp__img').not('.pswp__img--placeholder')
             if(!url&&(getTransform(jQuery(item))+stylePar)=='0' && imgTag.length){
                 url=imgTag[0].src;
-                if(!jQuery(document).find('.wb-item-wrap').length){
+                if(!jQuery(document).find('.wb-item-wrap').length&&!jQuery(document).find('.profile-cover').length){
                     desc=jQuery('.weibo-text').text();
+                }else{
+                    desc=''
                 }
             }
         })
@@ -77,7 +78,7 @@ function appendDownloadBtnOne(type, selector, pasrams, savedatas, title, onClick
                 jQuery(htmlTag).appendTo(elements);
             }
         }
-        savedatas ='';
+        url='',desc='',savedatas ='';
     });
 }
 //视频文件
@@ -93,13 +94,15 @@ function appendBtnToVideo(type, selector,title, pasrams, savedatas,  onClick){
         //有video
         var videoUrl=jQuery(elements).find('video')[0].src
         var desc=''
-        if(!jQuery(document).find('.wb-item-wrap').length){
+        if(!jQuery(document).find('.wb-item-wrap').length&&!jQuery(document).find('.profile-cover').length){
             desc=jQuery('.weibo-text').text();
+        }else{
+            desc=''
         }
         savedatas=[{url:videoUrl,desc:desc}]
         htmlTag = YNBrowser.showDownloadBtns(type, pasrams, savedatas, title, onClick); //添加元素
         jQuery(htmlTag).appendTo(elements);
-        savedatas=[];
+        url='',desc='',savedatas ='';
     })
 }
 YNBrowser.showOptimizedTips();
