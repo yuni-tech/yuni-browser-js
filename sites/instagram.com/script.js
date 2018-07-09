@@ -95,24 +95,29 @@ YNBrowser.ready(function() {
         if(_sharedData&&_sharedData.entry_data&&_sharedData.entry_data.PostPage){
           shortcode_media = _sharedData.entry_data.PostPage[0].graphql.shortcode_media
           if(jQuery(".gElp9").length&&jQuery(".gElp9 a[title='instagram']").length&&jQuery(".gElp9 span").length){
-            desc=jQuery(".gElp9 span").text();
+            desc=jQuery(jQuery(".gElp9")[0]).text().replace(/instagram/,'instagram  ')
           }
-          if(shortcode_media.__typename =='GraphImage'){//单图
-            url=shortcode_media.display_url||''
-            msg={title:'检查到1个图片文件',items: [{url: url,desc: desc}]}
-          }else if(shortcode_media.__typename =='GraphSidecar'){//多图
+          if(shortcode_media.__typename =='GraphSidecar'){//多图 或多视频，或视频图片混杂
             var childSlides=shortcode_media.edge_sidecar_to_children
             var childSlide=childSlides.edges
             if(childSlides&&childSlide&&childSlide.length){
               for(var i=0;i<childSlide.length;i++){
-                url=childSlide[i].node.display_url
+                if(childSlide[i].node.is_video){
+                  url=childSlide[i].node.video_url//视频文件
+                }else{
+                  url=childSlide[i].node.display_url
+                }
                 msg.push({url:url,desc:desc})
               }
-              msg={title:"检查到"+childSlide.length+"个图片文件",items:msg}
+              msg={title:"检查到"+childSlide.length+"个文件",items:msg}
             }
-          }else if(shortcode_media.__typename =='GraphVideo'){
-            url=shortcode_media.video_url||''
-            msg={title:'检查到1个视频文件',items: [{url: url,desc: desc}]}
+          }else{//单图或者单视频
+            if(shortcode_media.is_video){
+              url=shortcode_media.video_url||''
+            }else{
+              url=shortcode_media.display_url||''
+            }
+            msg={items: [{url: url,desc: desc}]}
           }
           YNBrowser.showSavePopup(msg)
         }

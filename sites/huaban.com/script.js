@@ -11,4 +11,16 @@ YNBrowser.ready(function() {
     findUrl: 'img',
     attr: 'src'
   })
+  //.slide-holder #mobile_pin_img
+  YNBrowser.auto.trackMultipleImages({
+    selector: ".slide-holder #mobile_pin_img",
+    findUrl: 'img',
+    attr: 'src'
+  })
+  //.slide-holder #mobile_pin_img
+  YNBrowser.auto.trackMultipleImages({
+    selector: ".waterfall .pin-item.wfc",
+    findUrl: 'img',
+    attr: 'src'
+  })
 })
