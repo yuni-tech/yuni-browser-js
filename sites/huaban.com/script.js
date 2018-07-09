@@ -11,6 +11,16 @@ YNBrowser.ready(function() {
     findUrl: 'img',
     attr: 'src'
   })
+  YNBrowser.auto.trackMultipleImages({
+    selector: ".person-item",
+    findUrl: 'img',
+    attr: 'src'
+  })
+  YNBrowser.auto.trackMultipleImages({
+    selector: ".mobile-board-item",
+    findUrl: 'img',
+    attr: 'src'
+  })
   //.slide-holder #mobile_pin_img
   YNBrowser.auto.trackMultipleImages({
     selector: ".slide-holder #mobile_pin_img",

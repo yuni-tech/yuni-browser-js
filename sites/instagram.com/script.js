@@ -81,9 +81,12 @@ YNBrowser.ready(function() {
       document.cookie="nowUrl=0"
     }
     YNBrowser.track('._9eogI.E3X2T', function(elt) {
-      if(window.history&&window.history.length&&window.history.length!=getCookie('nowUrl')){
+      if(window.history&&window.history.length&&window.history.length!=getCookie('nowUrl')){//进入新页面触发
         window.location.reload(true);
       }
+      window.onpopstate = function (event) {//点击浏览器前进或者后退触发 第一次进来不触发
+        window.location.reload(true);
+      };
       if(!jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length&&!jQuery('.Nnq7C.weEfm').length){
         if(jQuery('.yn-optimized-tips').length){//去除提示
           jQuery('.yn-optimized-tips').remove()
