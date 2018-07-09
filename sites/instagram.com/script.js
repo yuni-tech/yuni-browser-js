@@ -81,10 +81,13 @@ YNBrowser.ready(function() {
       document.cookie="nowUrl=0"
     }
     YNBrowser.track('._9eogI.E3X2T', function(elt) {
+      console.log(window.history);
       if(window.history&&window.history.length&&window.history.length!=getCookie('nowUrl')){//进入新页面触发
+        console.log(window.history);
         window.location.reload(true);
       }
       window.onpopstate = function (event) {//点击浏览器前进或者后退触发 第一次进来不触发
+        console.log(event);
         window.location.reload(true);
       };
       if(!jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length&&!jQuery('.Nnq7C.weEfm').length){
@@ -123,6 +126,9 @@ YNBrowser.ready(function() {
             msg={items: [{url: url,desc: desc}]}
           }
           YNBrowser.showSavePopup(msg)
+        }
+        if(!jQuery('.yn-popup-layer').length){//返回或者前进后再点击具体帖子
+          window.location.reload(true);
         }
       }else if(jQuery('article._8Rm4L.M9sTE.h0YNM.SgTZ1').length||jQuery('.Nnq7C.weEfm').length){
         YNBrowser.showOptimizedTips("打开帖子保存图片或视频至相册")
