@@ -40,7 +40,7 @@
     jQuery(tpl.join('')).appendTo(document.body)
   }
 
-  YNBrowser.showSavePopup = function(options) {
+  YNBrowser.showSavePopup = function(options,selecter) {
     options = options || {}
     options.items = options.items || []
     if (options.items.length <= 0) {
@@ -66,7 +66,11 @@
         YNBrowser.save(options.items)
       }
     })
-    popup.appendTo(document.body)
+    if(selecter){
+      popup.appendTo(selecter)
+    }else{
+      popup.appendTo(document.body)
+    }
   }
 
   // 在某个元素里显示保存按钮

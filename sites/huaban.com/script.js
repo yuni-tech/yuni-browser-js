@@ -41,11 +41,57 @@ YNBrowser.ready(function() {
       })
     })
   }
+  //查看大图
+  YNBrowser.track('#image-viewer', function(elt) {
+    if(jQuery('#image-viewer').find('.yn-popup-layer.yn-save-popup').length){
+      return
+    }
+    var items=[]
+    var desc=''
+    var url=''
+    if(jQuery('.pin-board-title').length){
+      desc=jQuery('.pin-board-title').text();
+    }
+    if(jQuery('#pin_board_imgs>img').length){
+      for(var i=0;i<jQuery('#pin_board_imgs>img').length;i++){
+        url=jQuery('#pin_board_imgs>img')[i].src.split('_')[0]
+        items.push({desc:desc,url:url});
+      }
+    }
+    YNBrowser.showSavePopup({items:items},'#image-viewer')
+    var items=[]
+    var desc=[]
+    var url=[]
+  })
+  // YNBrowser.track('#image-viewer', function(elt) {
+  YNBrowser.track('#mobile_pin_img', function(elt) {
+    console.log(elt);
+    // #pin_board_imgs
+    // .pin-board-title
+    var items=[]
+    var desc=''
+    var url=''
+    if(jQuery('.pin-board-title').length){
+      desc=jQuery('.pin-board-title').text();
+    }
+    if(jQuery('#pin_board_imgs>img').length){
+      for(var i=0;i<jQuery('#pin_board_imgs>img').length;i++){
+        url=jQuery('#pin_board_imgs>img')[i].src.split('_')[0]
+        items.push({desc:desc,url:url});
+      }
+    }
+    YNBrowser.showSaveButton('#mobile_pin_view .slide-holder', function() {
+      // 带上描述
+      YNBrowser.save(items)
+    })
+    desc=''
+    url=''
+    item=''
+  })
   addButton(2,'.waterfall .wfc.mobile-board-item','.board-info>h3',{size:'small'})
   addButton(2,'.waterfall .person-item.wfc',{size:'small'})
   addButton(2,'.waterfall .wfc.mobile-explore-item','.board-title',{size:'small'})
   addButton(1,'.waterfall .pin-item.wfc','.description')
   addButton(1,'.waterfall .pin-item.wfc','.description')
   addButton(1,'.recommend-items>.recommend-item','.recommend-title')
-  addButton(1,'.slide-holder #mobile_pin_img')
 })
