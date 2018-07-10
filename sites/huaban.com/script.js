@@ -4,63 +4,48 @@ YNBrowser.ready(function() {
   YNBrowser.track('#index_cover', function(el) {
     el.remove()
   })
-
-  // recommend-item
-  YNBrowser.auto.trackMultipleImages({
-    selector: ".recommend-item",
-    findUrl: 'img',
-    attr: 'src'
-  })
-  YNBrowser.auto.trackMultipleImages({
-    selector: ".person-item",
-    findUrl: 'img',
-    attr: 'src'
-  })
-  //.slide-holder #mobile_pin_img
-  YNBrowser.auto.trackMultipleImages({
-    selector: ".slide-holder #mobile_pin_img",
-    findUrl: 'img',
-    attr: 'src'
-  })
-  YNBrowser.track('.waterfall .wfc.mobile-board-item', function(elt) {
-    var desc=''
-    var url=''
-    var item=[]
-    YNBrowser.showSaveButton(elt,function(){
-      if(jQuery(elt).find('.board-info>h3').length){
-        desc=jQuery(elt).find('.board-info>h3').text();
-      }
-      if(jQuery(elt).find('img').length){//多张图
-        for(var i=0;i<jQuery(elt).find('img').length;i++){
-          url=jQuery(elt).find('img')[i].src.split('_')[0]//缩略图改为高清图片
-          item.push({url:url,desc:desc})
+  function addButton(type,selector,titleTag,options){
+    if(!options){
+      options=''
+    }
+    if (typeof titleTag == 'object') {
+      options = titleTag
+      titleTag = ''
+    }
+    YNBrowser.track(selector, function(elt) {
+      var desc=''
+      var url=''
+      var item=[]
+      YNBrowser.showSaveButton(elt,options,function(){
+        if(titleTag&&jQuery(elt).find(titleTag).length){
+          desc=jQuery(elt).find(titleTag).text();
         }
-      }
-      // 带上描述
-      YNBrowser.save(item)
-      desc=''
-      url=''
-      item=''
-    })
-  })
-  //.pin-item
-  YNBrowser.track('.waterfall .pin-item.wfc', function(elt) {
-    var desc=''
-    var url=''
-    YNBrowser.showSaveButton(elt,function(){
-      if(jQuery(elt).find('.description').length){
-        desc=jQuery(elt).find('.description').text();
-      }
-      if(jQuery(elt).find('img').length){
-        url=jQuery(elt).find('img')[0].src.split('_')[0]//缩略图改为高清图片
-      }
-      // 带上描述
-      YNBrowser.save({
-        url: url,
-        desc: desc
+        if(type===1){//单张图
+          if(jQuery(elt).find('img').length){
+            url=jQuery(elt).find('img')[0].src.split('_')[0]//缩略图改为高清图片
+          }
+          item=[{url:url,desc:desc}]
+        }else if(type===2){//多张图
+          if(options&&jQuery(elt).find('img').length){
+            for(var i=0;i<jQuery(elt).find('img').length;i++){
+              url=jQuery(elt).find('img')[i].src.split('_')[0]//缩略图改为高清图片
+              item.push({url:url,desc:desc})
+            }
+          }
+        }
+        // 带上描述
+        YNBrowser.save(item)
+        desc=''
+        url=''
+        item=''
       })
-      desc=''
-      url=''
     })
-  })
+  }
+  addButton(2,'.waterfall .wfc.mobile-board-item','.board-info>h3',{size:'small'})
+  addButton(2,'.waterfall .person-item.wfc',{size:'small'})
+  addButton(2,'.waterfall .wfc.mobile-explore-item','.board-title',{size:'small'})
+  addButton(1,'.waterfall .pin-item.wfc','.description')
+  addButton(1,'.waterfall .pin-item.wfc','.description')
+  addButton(1,'.recommend-items>.recommend-item','.recommend-title')
+  addButton(1,'.slide-holder #mobile_pin_img')
 })
