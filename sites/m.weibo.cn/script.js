@@ -57,11 +57,6 @@ function appendDownloadBtnOne(type, selector, pasrams, savedatas, title, onClick
             var imgTag=jQuery(item).find('img.pswp__img').not('.pswp__img--placeholder')
             if(!url&&(getTransform(jQuery(item))+stylePar)=='0' && imgTag.length){
                 url=imgTag[0].src;
-                if(!jQuery(document).find('.wb-item-wrap').length&&!jQuery(document).find('.profile-cover').length){
-                    desc=jQuery('.weibo-text').text();
-                }else{
-                    desc=''
-                }
             }
         })
         savedatas=[{url:url,desc:desc}];
@@ -94,11 +89,6 @@ function appendBtnToVideo(type, selector,title, pasrams, savedatas,  onClick){
         //有video
         var videoUrl=jQuery(elements).find('video')[0].src
         var desc=''
-        if(!jQuery(document).find('.wb-item-wrap').length&&!jQuery(document).find('.profile-cover').length){
-            desc=jQuery('.weibo-text').text();
-        }else{
-            desc=''
-        }
         savedatas=[{url:videoUrl,desc:desc}]
         htmlTag = YNBrowser.showDownloadBtns(type, pasrams, savedatas, title, onClick); //添加元素
         jQuery(htmlTag).appendTo(elements);
