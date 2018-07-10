@@ -4,63 +4,94 @@ YNBrowser.ready(function() {
   YNBrowser.track('#index_cover', function(el) {
     el.remove()
   })
-
-  // recommend-item
-  YNBrowser.auto.trackMultipleImages({
-    selector: ".recommend-item",
-    findUrl: 'img',
-    attr: 'src'
-  })
-  YNBrowser.auto.trackMultipleImages({
-    selector: ".person-item",
-    findUrl: 'img',
-    attr: 'src'
-  })
-  //.slide-holder #mobile_pin_img
-  YNBrowser.auto.trackMultipleImages({
-    selector: ".slide-holder #mobile_pin_img",
-    findUrl: 'img',
-    attr: 'src'
-  })
-  YNBrowser.track('.waterfall .wfc.mobile-board-item', function(elt) {
-    var desc=''
-    var url=''
-    var item=[]
-    YNBrowser.showSaveButton(elt,function(){
-      if(jQuery(elt).find('.board-info>h3').length){
-        desc=jQuery(elt).find('.board-info>h3').text();
-      }
-      if(jQuery(elt).find('img').length){//多张图
-        for(var i=0;i<jQuery(elt).find('img').length;i++){
-          url=jQuery(elt).find('img')[i].src.split('_')[0]//缩略图改为高清图片
-          item.push({url:url,desc:desc})
+  function addButton(type,selector,titleTag,options){
+    if(!options){
+      options=''
+    }
+    if (typeof titleTag == 'object') {
+      options = titleTag
+      titleTag = ''
+    }
+    YNBrowser.track(selector, function(elt) {
+      var desc=''
+      var url=''
+      var item=[]
+      YNBrowser.showSaveButton(elt,options,function(){
+        if(titleTag&&jQuery(elt).find(titleTag).length){
+          desc=jQuery(elt).find(titleTag).text();
         }
-      }
-      // 带上描述
-      YNBrowser.save(item)
-      desc=''
-      url=''
-      item=''
+        if(type===1){//单张图
+          if(jQuery(elt).find('img').length){
+            url=jQuery(elt).find('img')[0].src.split('_')[0]//缩略图改为高清图片
+          }
+          item=[{url:url,desc:desc}]
+        }else if(type===2){//多张图
+          if(options&&jQuery(elt).find('img').length){
+            for(var i=0;i<jQuery(elt).find('img').length;i++){
+              url=jQuery(elt).find('img')[i].src.split('_')[0]//缩略图改为高清图片
+              item.push({url:url,desc:desc})
+            }
+          }
+        }
+        // 带上描述
+        YNBrowser.save(item)
+        desc=''
+        url=''
+        item=''
+      })
     })
-  })
-  //.pin-item
-  YNBrowser.track('.waterfall .pin-item.wfc', function(elt) {
+  }
+  //查看大图
+  YNBrowser.track('#image-viewer', function(elt) {
+    if(jQuery('#image-viewer').find('.yn-popup-layer.yn-save-popup').length){
+      return
+    }
+    var items=[]
     var desc=''
     var url=''
-    YNBrowser.showSaveButton(elt,function(){
-      if(jQuery(elt).find('.description').length){
-        desc=jQuery(elt).find('.description').text();
+    if(jQuery('.pin-board-title').length){
+      desc=jQuery('.pin-board-title').text();
+    }
+    if(jQuery('#pin_board_imgs>img').length){
+      for(var i=0;i<jQuery('#pin_board_imgs>img').length;i++){
+        url=jQuery('#pin_board_imgs>img')[i].src.split('_')[0]
+        items.push({desc:desc,url:url});
       }
-      if(jQuery(elt).find('img').length){
-        url=jQuery(elt).find('img')[0].src.split('_')[0]//缩略图改为高清图片
-      }
-      // 带上描述
-      YNBrowser.save({
-        url: url,
-        desc: desc
-      })
-      desc=''
-      url=''
-    })
+    }
+    YNBrowser.showSavePopup({items:items},'#image-viewer')
+    var items=[]
+    var desc=[]
+    var url=[]
   })
+  // YNBrowser.track('#image-viewer', function(elt) {
+  YNBrowser.track('#mobile_pin_img', function(elt) {
+    console.log(elt);
+    // #pin_board_imgs
+    // .pin-board-title
+    var items=[]
+    var desc=''
+    var url=''
+    if(jQuery('.pin-board-title').length){
+      desc=jQuery('.pin-board-title').text();
+    }
+    if(jQuery('#pin_board_imgs>img').length){
+      for(var i=0;i<jQuery('#pin_board_imgs>img').length;i++){
+        url=jQuery('#pin_board_imgs>img')[i].src.split('_')[0]
+        items.push({desc:desc,url:url});
+      }
+    }
+    YNBrowser.showSaveButton('#mobile_pin_view .slide-holder', function() {
+      // 带上描述
+      YNBrowser.save(items)
+    })
+    desc=''
+    url=''
+    item=''
+  })
+  addButton(2,'.waterfall .wfc.mobile-board-item','.board-info>h3',{size:'small'})
+  addButton(2,'.waterfall .person-item.wfc',{size:'small'})
+  addButton(2,'.waterfall .wfc.mobile-explore-item','.board-title',{size:'small'})
+  addButton(1,'.waterfall .pin-item.wfc','.description')
+  addButton(1,'.waterfall .pin-item.wfc','.description')
+  addButton(1,'.recommend-items>.recommend-item','.recommend-title')
 })

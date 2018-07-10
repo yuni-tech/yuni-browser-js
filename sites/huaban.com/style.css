@@ -2,6 +2,8 @@
     top:30px;
     right:6px;
 }
-.waterfall .pin-item.wfc .yn-btn-save.right-top{
+.waterfall .pin-item.wfc .yn-btn-save.right-top,
+.waterfall .wfc.mobile-explore-item .yn-btn-save.right-top,
+.waterfall .person-item.wfc .yn-btn-save.right-top{
     top:2px;right:2px;
 }
