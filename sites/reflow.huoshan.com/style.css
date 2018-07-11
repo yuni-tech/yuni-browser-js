@@ -1,4 +1,4 @@
-.replay-mask.hidden.showing,.recommend-video-wrap,.bottom-banner{
+.replay-mask.hidden.showing,.recommend-video-wrap,.bottom-banner,#topDlBannerWrapper{
     display:none !important;
 }
 body{
