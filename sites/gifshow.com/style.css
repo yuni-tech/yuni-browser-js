@@ -1,0 +1,6 @@
+.recommend-list,.hot-list-wrapper,.banner-bottom,.top,#recommendWrap{
+    display:none !important;
+}
+body{
+    margin-bottom:100px;
+}
