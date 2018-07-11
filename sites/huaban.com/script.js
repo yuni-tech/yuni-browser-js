@@ -63,22 +63,24 @@ YNBrowser.ready(function() {
     var desc=[]
     var url=[]
   })
-  // YNBrowser.track('#image-viewer', function(elt) {
   YNBrowser.track('#mobile_pin_img', function(elt) {
-    console.log(elt);
-    // #pin_board_imgs
-    // .pin-board-title
     var items=[]
     var desc=''
     var url=''
-    if(jQuery('.pin-board-title').length){
-      desc=jQuery('.pin-board-title').text();
+    // if(jQuery('.pin-board-title').length){//多张
+    //   desc=jQuery('.pin-board-title').text();
+    // }
+    if(jQuery('.pin-description>.text').length){
+      desc=jQuery('.pin-description>.text').text();
     }
-    if(jQuery('#pin_board_imgs>img').length){
-      for(var i=0;i<jQuery('#pin_board_imgs>img').length;i++){
-        url=jQuery('#pin_board_imgs>img')[i].src.split('_')[0]
-        items.push({desc:desc,url:url});
-      }
+    if(jQuery('#mobile_pin_img>img').length){
+      // for(var i=0;i<jQuery('#pin_board_imgs>img').length;i++){//多张
+      //   url=jQuery('#pin_board_imgs>img')[i].src.split('_')[0]
+      //   items.push({desc:desc,url:url});
+      // }
+      //单张
+      url=jQuery('#mobile_pin_img>img')[0].src.split('_')[0]
+      items.push({desc:desc,url:url});
     }
     YNBrowser.showSaveButton('#mobile_pin_view .slide-holder', function() {
       // 带上描述
