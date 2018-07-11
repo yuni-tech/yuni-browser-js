@@ -156,13 +156,14 @@ YNBrowser.showSaveButton(elt, {
 })
 ```
 
-### YNBrowser.showSavePopup(options)
+### YNBrowser.showSavePopup(options,selecter)
 
 显示保存popup 为浮在页面底部的大按钮
 
 参数说明:
 * options.title: 可选，要显示的提示文案
 * options.items: 要保存的内容，与`YNBrowser.save(options)`中的options参数一致
+* selecter:可选,要添加按钮到指定的元素下,默认添加到document
 
 ```js
 YNBrowser.showSavePopup({

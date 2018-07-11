@@ -8,7 +8,7 @@
   YNBrowser.auto.trackSingleImage = function(selector) {
     YNBrowser.track(selector, function(elt) {
       YNBrowser.showSavePopup({
-        title: '检测到一张图片',
+        title: '检测到1张图片',
         items: [elt.src]
       })
     })
@@ -17,7 +17,7 @@
   YNBrowser.auto.trackSingleVideo = function(selector) {
     YNBrowser.track(selector, function(elt) {
       YNBrowser.showSavePopup({
-        title: '检测到一个视频',
+        title: '检测到1个视频',
         items: [elt.src]
       })
     })

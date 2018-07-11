@@ -1,0 +1,6 @@
+.replay-mask.hidden.showing,.recommend-video-wrap,.bottom-banner{
+    display:none !important;
+}
+body{
+    margin-bottom:60px;
+}
