@@ -22,6 +22,7 @@
             script.type = 'text/javascript';
             script.async = true;
             script.src = url;
+            script.charset='utf-8'
             script.onload = function(e) {
                 loaded++;
                 if (loaded == libs.length) {
@@ -102,6 +103,7 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
+        link.charset='utf-8'
         link.href = protocol + injectHost + '/' + path + 'inject.css?t=' + Date.now();
         link.media = 'all';
         document.getElementsByTagName("head")[0].appendChild(link);
@@ -110,6 +112,7 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
+        link.charset='utf-8'
         link.href = injectBase + 'style.css?t=' + Date.now();
         link.media = 'all';
         document.getElementsByTagName("head")[0].appendChild(link);
@@ -118,6 +121,7 @@
         var script = document.createElement('script')
         script.type = "text/javascript"
         script.defer = true
+        script.charset='utf-8'
         script.src = injectBase + 'script.js?t=' + Date.now()
         document.getElementsByTagName("head")[0].appendChild(script);
            
