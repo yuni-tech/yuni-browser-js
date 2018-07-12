@@ -756,7 +756,7 @@
     jQuery(tpl.join('')).appendTo(document.body)
   }
 
-  YNBrowser.showSavePopup = function(options) {
+  YNBrowser.showSavePopup = function(options,selecter) {
     options = options || {}
     options.items = options.items || []
     if (options.items.length <= 0) {
@@ -766,7 +766,7 @@
 
     jQuery('.yn-popup-layer').remove()
 
-    let title = options.title || (options.items.length > 1 ? "检测到多个文件" : "检查到一个文件")
+    let title = options.title || (options.items.length > 1 ? "检测到"+options.items.length+"个文件" : "检查到1个文件")
     let tpl = [
       '<div class="yn-popup-layer yn-save-popup">',
         '<div class="yn-title">' + title + '</div>',
@@ -784,7 +784,11 @@
             YNBrowser.save(options.items)
         }
     })
-    popup.appendTo(document.body)
+    if(selecter){
+        popup.appendTo(selecter)
+    }else{
+        popup.appendTo(document.body)
+    }
   }
 
   // 在某个元素里显示保存按钮
@@ -839,7 +843,7 @@
   YNBrowser.auto.trackSingleImage = function(selector) {
     YNBrowser.track(selector, function(elt) {
       YNBrowser.showSavePopup({
-        title: '检测到一张图片',
+        title: '检测到1张图片',
         items: [elt.src]
       })
     })
@@ -848,7 +852,7 @@
   YNBrowser.auto.trackSingleVideo = function(selector) {
     YNBrowser.track(selector, function(elt) {
       YNBrowser.showSavePopup({
-        title: '检测到一个视频',
+        title: '检测到1个视频',
         items: [elt.src]
       })
     })

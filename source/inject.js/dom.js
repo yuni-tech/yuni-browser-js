@@ -40,7 +40,7 @@
     jQuery(tpl.join('')).appendTo(document.body)
   }
 
-  YNBrowser.showSavePopup = function(options) {
+  YNBrowser.showSavePopup = function(options,selecter) {
     options = options || {}
     options.items = options.items || []
     if (options.items.length <= 0) {
@@ -50,7 +50,7 @@
 
     jQuery('.yn-popup-layer').remove()
 
-    let title = options.title || (options.items.length > 1 ? "检测到多个文件" : "检查到一个文件")
+    let title = options.title || (options.items.length > 1 ? "检测到"+options.items.length+"个文件" : "检查到1个文件")
     let tpl = [
       '<div class="yn-popup-layer yn-save-popup">',
         '<div class="yn-title">' + title + '</div>',
@@ -66,7 +66,11 @@
         YNBrowser.save(options.items)
       }
     })
-    popup.appendTo(document.body)
+    if(selecter){
+      popup.appendTo(selecter)
+    }else{
+      popup.appendTo(document.body)
+    }
   }
 
   // 在某个元素里显示保存按钮
@@ -97,10 +101,13 @@
         $div.addClass('right-top')
     }
     $div.click(function() {
+      event.stopPropagation();
+      event.preventDefault();
       console.info('与你浏览器：点击了保存')
       onClick()
     });
-    elt.appendChild($div[0])
+    // elt.appendChild($div[0]) appendChild和append会报方法不存在的错误
+    jQuery($div[0]).appendTo(elt)
     jQuery(document).on('DOMNodeRemoved', '#' + uuid, function() {
         showDownloadBtn(elt, options, onClick)
     })

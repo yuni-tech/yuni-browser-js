@@ -1,0 +1,9 @@
+.yn-popup-layer{
+    bottom:.63rem;
+}
+body{
+    margin-bottom:60px !important;
+}
+#footer,#footer>a{
+    height:0.63rem !important;
+}

@@ -7,6 +7,6 @@
 .mwb-video .mwbv-control-bar{
     bottom:70px !important;
 }
-.lite-enter-btns .lite-log-in,.lite-enter-btns .lite-sign-in{
-    display:none;
+.lite-enter-btns{
+    display:none !important;
 }

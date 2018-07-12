@@ -56,7 +56,7 @@ YNBrowser.ready(function() {
   if (location.pathname.startsWith('/examples/video.html')) {
     YNBrowser.track('.player', function(elt) {
       YNBrowser.showSavePopup({
-        title: '检测到一个视频',
+        title: '检测到1个视频',
         items: [elt.src]
       })
     })
