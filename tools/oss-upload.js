@@ -42,19 +42,22 @@ function uploadNext(uploads, complete) {
       complete(new Error('status not 200'))
       return
     }
-    uploadNext(uploads, complete)
+    setTimeout(() => {
+      uploadNext(uploads, complete)
+    }, 200)
   }).catch(error => {
-    console.log('upload error: ')
-    console.log(err)
     complete(error)
   })
 }
 
 uploadNext(tasks.slice(0), (error) => {
   if (error) {
-    throw error
+    console.log('upload error: ')
+    console.log(error)
   }
-  console.log('upload complete!')
+  setTimeout(() => {
+    console.log('upload complete!')
+  }, 5000)
 })
 
 
