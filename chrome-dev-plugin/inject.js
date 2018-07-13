@@ -11,6 +11,7 @@
     var script = document.createElement('script')
     script.id = "yuni-browser-inject"
     script.type = "text/javascript"
+    script.charset='utf-8'
     script.src = sitesBase + 'inject.js?t=' + Date.now()
     script.setAttribute("debug", "true")
     script.setAttribute("host", injectHost)
