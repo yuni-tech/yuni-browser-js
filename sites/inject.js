@@ -625,6 +625,11 @@
     }
 
     function injectDomainCssAndScript() {
+        if(document.querySelector("meta[charset='gbk']")){
+            document.querySelector("meta[charset='gbk']").setAttribute('charset','utf-8');
+            console.log(11);
+        }
+        // document.getElementsByTagName("head")[0].appendChild(meat);
         // 注入inject.css
         var link = document.createElement('link');
         link.rel = 'stylesheet';
