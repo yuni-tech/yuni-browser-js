@@ -29,18 +29,35 @@ const client = new OSS({
   accessKeySecret: process.env.OSS_APP_SECRET,
 })
 
-co(function* () {
-  let uploads = tasks.slice(0)
-  while(uploads.length > 0) {
-    let item = uploads.shift()
-    console.log('uploading ' + item.name)
-    var result = yield client.put(item.name, item.file)
-    console.log('upload success: ' + result.name)
+function uploadNext(uploads, complete) {
+  let item = uploads.shift()
+  if (!item) {
+    complete()
+    return
   }
-  console.log('upload completed !')
-}).catch(function (err) {
-  console.error('upload error: ')
-  console.error(err)
+  console.log('uploading ' + item.name)
+  client.put(item.name, item.file).then(result => {
+    console.log('upload result: ' + result.name + ' ' + result.res.status)
+    if (result.res.status != 200) {
+      complete(new Error('status not 200'))
+      return
+    }
+    setTimeout(() => {
+      uploadNext(uploads, complete)
+    }, 200)
+  }).catch(error => {
+    complete(error)
+  })
+}
+
+uploadNext(tasks.slice(0), (error) => {
+  if (error) {
+    console.log('upload error: ')
+    console.log(error)
+  }
+  setTimeout(() => {
+    console.log('upload complete!')
+  }, 5000)
 })
 
 
