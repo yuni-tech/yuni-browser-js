@@ -1,5 +1,5 @@
 
-YNBrowser.ready(function() {
+// YNBrowser.ready(function() {
   // 如果有蒙层则删除
   YNBrowser.track('#index_cover', function(el) {
     el.remove()
@@ -96,4 +96,4 @@ YNBrowser.ready(function() {
   addButton(1,'.waterfall .pin-item.wfc','.description')
   addButton(1,'.waterfall .pin-item.wfc','.description')
   addButton(1,'.recommend-items>.recommend-item','.recommend-title')
-})
+// })
