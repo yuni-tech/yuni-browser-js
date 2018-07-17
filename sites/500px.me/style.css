@@ -1,0 +1,15 @@
+.following_tab .photo_activity_item .photo_activity_item__details_top_right{/*关注按钮布局有问题调整*/
+    float:none;
+}
+#hellobarNew.tm .inside>div.applink .button,
+.single-photo-detail-mobile-container .comment-region .dropdown-div,
+.single-photo-detail-mobile-container .footer-region,
+#hellobarNew .inside>div.applink .button{
+    display:none;
+}
+body{
+    margin-bottom:100px;
+}
+.activity_tab .photo_activity_item .imgSuperCmp .group_num, .following_tab .photo_activity_item .imgSuperCmp .group_num, .notifications_tab .photo_activity_item .imgSuperCmp .group_num{
+    left:10px;
+}

@@ -78,6 +78,16 @@
 
 以下API在开发和正式环境中由与你内部库提供，包含一些必要的函数和一些辅助快捷开发的函数
 
+### YNBrowser.bgImgUrl(url)
+
+处理图片为背景图片的情形,不同浏览器获取的背景图片单双引号是不一样的
+chrome获取的背景图片为 url("https://..../beauty.jpg") 
+safari获取的背景图片为 url('https://..../beauty.jpg') 
+YNBrowser.bgImgUrl(url)处理返回 https://..../beauty.jpg 
+
+参数说明：
+url:获取到的backgroundImage,比如 url("https://..../beauty.jpg") 或 url('https://..../beauty.jpg') 
+
 ### YNBrowser.save(options)
 
 调用`与你客户端`上传资源到相册的功能
