@@ -27,12 +27,12 @@ function showBtn(selecter){
                 url=urlP5(url);
             }
         }else if(jQuery(elt).find(".photo_activity_item__img.set_index_img1").length){
-            elmsAdd=jQuery(elt).find('.photo_activity_item__img.set_index_img1')
-            url=urlP5(YNBrowser.bgImgUrl(elmsAdd.css("backgroundImage")));
+            elmsAdd=jQuery(elt).find('.photo_activity_item')
+            url=urlP5(YNBrowser.bgImgUrl(jQuery(elt).find('.photo_activity_item__img.set_index_img1').css("backgroundImage")));
         }
         if(url){
             YNBrowser.showSaveButton(elmsAdd,{onClick: function() {
-                    rowser.save({desc:desc,url:url})
+                    YNBrowser.save({desc:desc,url:url})
                 }
             })
         }

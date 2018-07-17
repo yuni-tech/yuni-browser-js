@@ -13,3 +13,9 @@ body{
 .activity_tab .photo_activity_item .imgSuperCmp .group_num, .following_tab .photo_activity_item .imgSuperCmp .group_num, .notifications_tab .photo_activity_item .imgSuperCmp .group_num{
     left:10px;
 }
+.graphic-txt-item .photo_activity_item{
+    position: relative;
+}
+.graphic-txt-item .photo_activity_item .yn-btn-save.right-top{
+    top:100px;
+}
