@@ -755,7 +755,7 @@
     }
   }
 
-  YNBrowser.showOptimizedTips = function(title) {
+  YNBrowser.showOptimizedTips = function(title,selecter) {
     jQuery('.yn-popup-layer').remove()
     title = title || '页面已优化,点击图片或视频保存至相册'
     let tpl = [
@@ -764,7 +764,11 @@
         '<div class="yn-title">' + title + '</div>',
       '</div>'
     ]
-    jQuery(tpl.join('')).appendTo(document.body)
+    if(selecter){
+        jQuery(tpl.join('')).appendTo(selecter)
+    }else{
+        jQuery(tpl.join('')).appendTo(document.body)
+    }
   }
 
   YNBrowser.showSavePopup = function(options,selecter) {

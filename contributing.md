@@ -82,11 +82,11 @@
 
 处理图片为背景图片的情形,不同浏览器获取的背景图片单双引号是不一样的
 chrome获取的背景图片为 url("https://..../beauty.jpg") 
-safari获取的背景图片为 url('https://..../beauty.jpg') 
+safari获取的背景图片为 url(https://..../beauty.jpg) 
 YNBrowser.bgImgUrl(url)处理返回 https://..../beauty.jpg 
 
 参数说明：
-url:获取到的backgroundImage,比如 url("https://..../beauty.jpg") 或 url('https://..../beauty.jpg') 
+url:获取到的backgroundImage,比如 url("https://..../beauty.jpg") 或 url(https://..../beauty.jpg) 
 
 ### YNBrowser.save(options)
 
@@ -188,12 +188,13 @@ YNBrowser.showSavePopup({
 })
 ```
 
-### YNBrowser.showOptimizedTips(title)
+### YNBrowser.showOptimizedTips(title,selecter)
 
 显示网页已被优化的提示
 
 参数说明：
 * title: 可选，自定义提示文案
+* selecter: 要添加到的父元素,如果不传递默认为body
 
 ```js
 YNBrowser.showOptimizedTips("网站已优为适合移动设备")
