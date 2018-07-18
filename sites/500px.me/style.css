@@ -17,11 +17,11 @@ body{
     top:2px;
     left:2px;
 }
-.graphic-txt-item .photo_activity_item{
+.following_tab .photo_activity_item{
     position: relative;
 }
-.graphic-txt-item .photo_activity_item .yn-btn-save.right-top{
-    top:100px;
+.following_tab .photo_activity_item .yn-btn-save.right-top{
+    top:90px;
 }
 .full-aspect-ratio-photo-grid>.justified-gallery>.photo_thumbnail .yn-btn-save.small{
     right:2px;

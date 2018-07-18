@@ -20,15 +20,19 @@ function showBtn(selecter){
                 desc=textTwo
             }
         }
+        elmsAdd=jQuery(elt).find('.photo_activity_item')
         if(elmsImg.length){
-            elmsAdd=jQuery(elt).find('.imgSuperCmp')
             url=elmsImg.attr('data-original')
             if(url.indexOf('!p')>=0){
                 url=urlP5(url);
             }
         }else if(jQuery(elt).find(".photo_activity_item__img.set_index_img1").length){
-            elmsAdd=jQuery(elt).find('.photo_activity_item')
             url=urlP5(YNBrowser.bgImgUrl(jQuery(elt).find('.photo_activity_item__img.set_index_img1').css("backgroundImage")));
+        }else if(jQuery(elt).find("img.photo_activity_item__img").length){
+            url=jQuery(elt).find("img.photo_activity_item__img").attr('data-original')
+            if(url.indexOf('!p')>=0){
+                url=urlP5(url);
+            }
         }
         if(url){
             YNBrowser.showSaveButton(elmsAdd,{onClick: function() {
