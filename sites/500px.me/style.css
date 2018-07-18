@@ -13,23 +13,29 @@ body{
 .activity_tab .photo_activity_item .imgSuperCmp .group_num, .following_tab .photo_activity_item .imgSuperCmp .group_num, .notifications_tab .photo_activity_item .imgSuperCmp .group_num{
     left:10px;
 }
-.full-aspect-ratio-photo-grid .photo_thumbnail .group_b{
+/* .full-aspect-ratio-photo-grid .photo_thumbnail .group_b{
     top:2px;
     left:2px;
-}
+} */
 .following_tab .photo_activity_item{
     position: relative;
 }
 .following_tab .photo_activity_item .yn-btn-save.right-top{
     top:90px;
 }
-.full-aspect-ratio-photo-grid>.justified-gallery>.photo_thumbnail .yn-btn-save.small{
+.full-aspect-ratio-photo-grid>.justified-gallery>.photo_thumbnail .yn-btn-save.right-top{
     right:2px;
     top:2px;
 }
-#hellobarNew.tm{
+.full-aspect-ratio-photo-grid>.justified-gallery>.photo_thumbnail .yn-btn-save.right-bottom{
+    right:2px;
+    bottom:2px;
+}
+#hellobarNew.tm,
+.story_container .cardLists .card .link_wrap,
+.setList .px_card .link_wrap{
     z-index:98;
 }
-.yn-optimized-tips .yn-title{
+.yn-title{
     text-align:left;
 }
