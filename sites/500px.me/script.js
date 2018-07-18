@@ -1,4 +1,4 @@
-//小按钮
+//小按钮 desc需要拼接
 function showBtn(selecter){
     YNBrowser.track(selecter, function(elt) {
         if(elmsAdd&&elmsAdd.find('.yn-btn-save').length){
@@ -22,17 +22,17 @@ function showBtn(selecter){
         }
         elmsAdd=jQuery(elt).find('.photo_activity_item')
         if(elmsImg.length){
-            url=elmsImg.attr('data-original')
-            if(url.indexOf('!p')>=0){
-                url=urlP5(url);
+            if(elmsImg.attr('data-original')){
+                url=elmsImg.attr('data-original')
+            }else if(elmsImg.attr('src')){
+                url=elmsImg.attr('src');
             }
+            url=urlP5(url);
         }else if(jQuery(elt).find(".photo_activity_item__img.set_index_img1").length){
             url=urlP5(YNBrowser.bgImgUrl(jQuery(elt).find('.photo_activity_item__img.set_index_img1').css("backgroundImage")));
         }else if(jQuery(elt).find("img.photo_activity_item__img").length){
             url=jQuery(elt).find("img.photo_activity_item__img").attr('data-original')
-            if(url.indexOf('!p')>=0){
-                url=urlP5(url);
-            }
+            url=urlP5(url);
         }
         if(url){
             YNBrowser.showSaveButton(elmsAdd,{onClick: function() {
@@ -66,9 +66,7 @@ YNBrowser.track('.single-photo-detail-mobile-container', function(elt) {
     if(elmsImg.length){
         for(var i=0;i<elmsImg.length;i++){
             url=elmsImg[i].src
-            if(url.indexOf('!p')>=0){
-                url=urlP5(url);
-            }
+            url=urlP5(url);
             items.push({desc:desc,url:url});
         }
     }
@@ -77,10 +75,12 @@ YNBrowser.track('.single-photo-detail-mobile-container', function(elt) {
     }
 })
 function urlP5(url){//url变为!p5更加高清
-    url=url.substring(0,url.length-3)+'!p5';
+    if(url&&url.indexOf('!')>=0){
+        url=url.substring(0,url.length-3)+'!p5';
+    }
     return url;
 }
-function smallBtn(selecter,pos){//给图片加小logo 无desc
+function smallBtn(selecter,pos,size){//给图片加小logo 无desc
     YNBrowser.track(selecter, function(elt) {
         if(jQuery(elt).find('.yn-btn-save').length){
             return
@@ -89,13 +89,12 @@ function smallBtn(selecter,pos){//给图片加小logo 无desc
         var elmsImg=jQuery(elt).find('img')
         if(elmsImg.length){
             url=elmsImg.attr('data-original')
-            if(url.indexOf('!p')>=0){
-                url=urlP5(url);
-            }
+            url=urlP5(url);
         }
         pos=pos||'right-top'
+        size=size||'small'
         if(url){
-            YNBrowser.showSaveButton(elt,{size: 'small',position:pos,onClick: function() {
+            YNBrowser.showSaveButton(elt,{size: size,position:pos,onClick: function() {
                     YNBrowser.save({url:url})
                 }
             })
@@ -116,9 +115,7 @@ function bgBtn(selecter,bgClass,descClass){//单个背景图片作为url
             }else{
                 url=YNBrowser.bgImgUrl(elmsImg.css("backgroundImage"))
             }
-            if(url.indexOf('!p')>=0){
-                url=urlP5(url);
-            }
+            url=urlP5(url);
         }
         if(descClass&&jQuery(elt).find(descClass).length){
             desc=jQuery(elt).find(descClass).text();
@@ -139,6 +136,39 @@ function showTip(selecter){//提示
         YNBrowser.showOptimizedTips('页面已优化,点击图片保存至相册',elt)
     })
 }
+function imgTetxBtn(selecter,child,bgClass,descClass){//监听父元素变化,循环给子元素添加按钮
+    YNBrowser.track(selecter, function(elt) {
+        var childTag=jQuery(elt).find(child)
+        if(jQuery(elt).find(child).length){
+            for(i=0;i<jQuery(elt).find(child).length;i++){
+                var desc=''
+                var url=''
+                if(jQuery(childTag[i]).find('.yn-btn-save').length){
+                    // jQuery(childTag[i]).remove('.yn-btn-save');
+                    continue
+                }
+                var elmsImg=jQuery(childTag[i]).find(bgClass)
+                if(elmsImg.length){
+                    if(elmsImg.attr('data-original')){
+                        url=elmsImg.attr('data-original')
+                    }else{
+                        url=YNBrowser.bgImgUrl(elmsImg.css("backgroundImage"))
+                    }
+                    url=urlP5(url);
+                }
+                if(descClass&&jQuery(childTag[i]).find(descClass).length){
+                    desc=jQuery(childTag[i]).find(descClass).text();
+                }
+                if(url){
+                    YNBrowser.showSaveButton(jQuery(childTag[i]),{onClick: function() {
+                            YNBrowser.save({desc:desc,url:url})
+                        }
+                    })
+                }
+            }
+        }
+    })
+}
 //大按钮 https://500px.me/community/v2/graphic/detail/017624d55e58ace5a00ad90d0c52cef3
 YNBrowser.track('.graphic-content-container .graphic-main-content-region', function(elt) {
     if(jQuery(elt).find('.yn-save-popup').length){
@@ -155,12 +185,15 @@ YNBrowser.track('.graphic-content-container .graphic-main-content-region', funct
         var textTwo=descElm.text()
         desc=textOne+"--"+textTwo
     }
+    if(jQuery('.graphic-content-container .head-img-mobile').length){
+        url=YNBrowser.bgImgUrl(jQuery('.graphic-content-container .head-img-mobile').css('background-image'))
+        url=urlP5(url);
+        items.push({desc:desc,url:url});
+    }
     if(elmsImg.length){
         for(var i=0;i<elmsImg.length;i++){
             url=elmsImg[i].src
-            if(url.indexOf('!p')>=0){
-                url=urlP5(url);
-            }
+            url=urlP5(url);
             items.push({desc:desc,url:url});
         }
     }
@@ -168,6 +201,7 @@ YNBrowser.track('.graphic-content-container .graphic-main-content-region', funct
         YNBrowser.showSavePopup({items:items},elt)
     }
 })
+//首页
 bgBtn('.galleries_layout','.image.copyright-contextmenu','.gallery_details__title')
 smallBtn('.main_body_album  .grid-container .photo_thumbnail','right-bottom')//影集
 showBtn('.following_tab .activity_item')//首页--关注
@@ -177,9 +211,23 @@ smallBtn('.photo_grid_region .full-aspect-ratio-photo-grid .photo_thumbnail','ri
 //个人中心
 smallBtn('.lyby_userdetail .profile_body .photo_thumbnail','right-bottom')//代表作
 bgBtn('.lyby_userdetail .setList .set_item','.top','.name')//影集
-bgBtn('.lyby_userdetail .cardLists .card','.top-img','.title')//图文
+imgTetxBtn('.lyby_userdetail .cardLists','.card','.top-img','.title')//图文
 // bgBtn('.lyby_userdetail .profile_header','.image')
 //搜索区域
-// .search_main_container
-bgBtn('.search_main_container .cardLists .card','.top-img','.title')//首页--关注
+imgTetxBtn('.search_main_container .cardLists','.card','.top-img','.title')//图文
+bgBtn('.search_main_container .galleries_body__grid .gallery_card_view','.top','.name')//影集
+//兴趣部落
+// https://500px.me/page/tribe/detail?tribeId=d008084a463d4d0eb6f80526f5f1abec&pagev=concentration
+bgBtn('.tribe-detail-container .galleries_body__grid .gallery_card_view','.top','.name')//影集
+showBtn('.tribe-detail-container .following_feed .activity_item')//精选
+bgBtn('.search_main_container .quest_item','.top','.quest_card__quest_title')//活动
+// 参赛
+// https://500px.me/community/contest/131cee2ace4c4f729d43ae4ab8b0dad2/awards 已获奖
+smallBtn('#profiles_show .profile_body .contest_prize_main>div','','normal')//影集
+smallBtn('#profiles_show .profile_body .grid-container .photo_thumbnail')//全部作品
+bgBtn('#profiles_show .profile_header','.image','.mask-content h3')//头部
+
+smallBtn('.contest_detail_main .profile_body .photo_thumbnail')//全部作品
+bgBtn('.contest_detail_main .profile_header','.image','.mask-content h3')//头部
+smallBtn('.contest_detail_main div.imgs__item')//简介
 

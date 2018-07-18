@@ -32,10 +32,18 @@ body{
     bottom:2px;
 }
 #hellobarNew.tm,
+.galleries_body__grid_region .px_card .link_wrap,
 .story_container .cardLists .card .link_wrap,
+.photo_grid_region_contest_v3 .px_card .link_wrap,
 .setList .px_card .link_wrap{
     z-index:98;
 }
+#hellobarNew.tm{
+    width: auto;
+}
 .yn-title{
     text-align:left;
+}
+.tribe-detail-container .following_tab .photo_activity_item .yn-btn-save.right-top{
+    top:10px;
 }
