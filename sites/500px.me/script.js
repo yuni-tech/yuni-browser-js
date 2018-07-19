@@ -144,7 +144,6 @@ function imgTetxBtn(selecter,child,bgClass,descClass){//监听父元素变化,�
                 var desc=''
                 var url=''
                 if(jQuery(childTag[i]).find('.yn-btn-save').length){
-                    // jQuery(childTag[i]).remove('.yn-btn-save');
                     continue
                 }
                 var elmsImg=jQuery(childTag[i]).find(bgClass)
@@ -216,18 +215,32 @@ imgTetxBtn('.lyby_userdetail .cardLists','.card','.top-img','.title')//图文
 //搜索区域
 imgTetxBtn('.search_main_container .cardLists','.card','.top-img','.title')//图文
 bgBtn('.search_main_container .galleries_body__grid .gallery_card_view','.top','.name')//影集
+bgBtn('.search_main_container .lists','.top-img','.writing>h2')//图文
+bgBtn('.search_main_container .user_item','.top')//背景
 //兴趣部落
 // https://500px.me/page/tribe/detail?tribeId=d008084a463d4d0eb6f80526f5f1abec&pagev=concentration
 bgBtn('.tribe-detail-container .galleries_body__grid .gallery_card_view','.top','.name')//影集
 showBtn('.tribe-detail-container .following_feed .activity_item')//精选
 bgBtn('.search_main_container .quest_item','.top','.quest_card__quest_title')//活动
+bgBtn('.tribe-detail-container .quest_item','.top','.quest_card__quest_title')//活动
+imgTetxBtn('.tribe-detail-container .cardLists','.card','.top-img','.title')//活动
+bgBtn('.tribe-detail-container .card-admin-container','.top')//背景
 // 参赛
 // https://500px.me/community/contest/131cee2ace4c4f729d43ae4ab8b0dad2/awards 已获奖
 smallBtn('#profiles_show .profile_body .contest_prize_main>div','','normal')//影集
 smallBtn('#profiles_show .profile_body .grid-container .photo_thumbnail')//全部作品
 bgBtn('#profiles_show .profile_header','.image','.mask-content h3')//头部
 
+bgBtn('.photo_grid_region_contest_v3 .quest_item','.top','.quest_card__quest_title')//活动列表  进行中,未进行,已结束
+
 smallBtn('.contest_detail_main .profile_body .photo_thumbnail')//全部作品
 bgBtn('.contest_detail_main .profile_header','.image','.mask-content h3')//头部
+
+// https://500px.me/community/discover?t=story
+bgBtn('.galleries_body__grid_region .gallery_card_view','.top','.name')//影集
+bgBtn('.discovery-story-list-region .lists','.top-img','.writing>h2')//影集
+imgTetxBtn('.discovery-story-list-region .cardLists','.card','.top-img','.title')//图文
+
 smallBtn('.contest_detail_main div.imgs__item')//简介
+imgTetxBtn('.contest_detail_main .prize-content-container .mobile-change','div.mobile','img')//最佳作品奖
 
