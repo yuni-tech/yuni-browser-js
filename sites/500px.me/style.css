@@ -13,10 +13,6 @@ body{
 .activity_tab .photo_activity_item .imgSuperCmp .group_num, .following_tab .photo_activity_item .imgSuperCmp .group_num, .notifications_tab .photo_activity_item .imgSuperCmp .group_num{
     left:10px;
 }
-/* .full-aspect-ratio-photo-grid .photo_thumbnail .group_b{
-    top:2px;
-    left:2px;
-} */
 .following_tab .photo_activity_item{
     position: relative;
 }
@@ -32,12 +28,14 @@ body{
     bottom:2px;
 }
 #hellobarNew.tm,
+.contest_maincmp .c__item>div .c_link,
 .search_main_container .search_users_body .sets_body .px_card .link_wrap,
 .member-group-list-container.search_user_grid_items .px_card .link_wrap,
 .story_container .lists .abstract .link_wrap,
 .galleries_body__grid_region .px_card .link_wrap,
 .story_container .cardLists .card .link_wrap,
 .photo_grid_region_contest_v3 .px_card .link_wrap,
+.recommend_users_container .recommend_users .sets_body .px_card .link_wrap,
 .setList .px_card .link_wrap{
     z-index:98;
 }
@@ -55,4 +53,12 @@ body{
 }
 .discovery-story-list-region .lists,.search_main_container .lists{
     position: relative;
+}
+.contest_maincmp .c__item{
+    position: relative;
+}
+.contest_maincmp .c__item>div.yn-btn-save{
+    position: absolute;
+    width: 75px;
+    height: 30px;
 }
