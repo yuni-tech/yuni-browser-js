@@ -1,6 +1,5 @@
 
-
-/* global define */
+/* global define */
 (function (root, factory) {
   window.YNBrowser = window.YNBrowser || {};
   YNBrowser.compareVersion = factory();
@@ -69,8 +68,7 @@
   };
 
 }));
-
-/* JSBridge */
+/* JSBridge */
 
 !(function(e) {
   var t = {};
@@ -523,8 +521,7 @@
   }
 ]);
 
-
-/**
+/**
  * 这里是inject.js 核心代码部分，主要完成以下事情：
  * 1. 加载jquery.js
  * 2. 同时加载匹配的css/js
@@ -546,9 +543,9 @@
         libs.forEach(function(url) {
             var script = document.createElement('script');
             script.type = 'text/javascript';
-            script.charset='utf-8'
             script.async = true;
             script.src = url;
+            script.charset='utf-8'
             script.onload = function(e) {
                 loaded++;
                 if (loaded == libs.length) {
@@ -632,7 +629,7 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.charset='utf-8';
+        link.charset='utf-8'
         link.href = protocol + injectHost + '/' + path + 'inject.css?t=' + Date.now();
         link.media = 'all';
         document.getElementsByTagName("head")[0].appendChild(link);
@@ -641,7 +638,7 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.charset='utf-8';
+        link.charset='utf-8'
         link.href = injectBase + 'style.css?t=' + Date.now();
         link.media = 'all';
         document.getElementsByTagName("head")[0].appendChild(link);
@@ -724,8 +721,7 @@
         return tag;
     }
 })();
-
-/**
+/**
  * 这里写一些针对dom元素解析和监听的通用作法
  */
 (function() {
@@ -757,7 +753,7 @@
 
   YNBrowser.showOptimizedTips = function(title,selecter) {
     jQuery('.yn-popup-layer').remove()
-    title = title || '页面已优化,点击图片或视频保存至相册'
+    title = title || '页面已优化，点击图片或视频保存至相册'
     let tpl = [
       '<div class="yn-popup-layer yn-optimized-tips">',
         '<div class="yn-logo yn-icon"></div>',
@@ -765,9 +761,9 @@
       '</div>'
     ]
     if(selecter){
-        jQuery(tpl.join('')).appendTo(selecter)
+      jQuery(tpl.join('')).appendTo(selecter)
     }else{
-        jQuery(tpl.join('')).appendTo(document.body)
+      jQuery(tpl.join('')).appendTo(document.body)
     }
   }
 
@@ -789,20 +785,18 @@
       '</div>'
     ]
     let popup = jQuery(tpl.join(''))
-    popup.find('.yn-btn').on('click', function() {
-        event.stopPropagation();
-        event.preventDefault();
-        console.info('与你浏览器：点击了保存', options.items)
-        if (options.onSaveClick) {
-            options.onSaveClick(options)
-        } else {
-            YNBrowser.save(options.items)
-        }
+    popup.find('.yn-btn').on('click', function(e) {
+      console.info('与你浏览器：点击了保存', options.items)
+      if (options.onSaveClick) {
+        options.onSaveClick(options)
+      } else {
+        YNBrowser.save(options.items)
+      }
     })
     if(selecter){
-        popup.appendTo(selecter)
+      popup.appendTo(selecter)
     }else{
-        popup.appendTo(document.body)
+      popup.appendTo(document.body)
     }
   }
 
@@ -834,10 +828,10 @@
         $div.addClass('right-top')
     }
     $div.click(function() {
-        event.stopPropagation();
-        event.preventDefault();
-        console.info('与你浏览器：点击了保存')
-        onClick()
+      event.stopPropagation();
+      event.preventDefault();
+      console.info('与你浏览器：点击了保存')
+      onClick()
     });
     // elt.appendChild($div[0]) appendChild和append会报方法不存在的错误
     jQuery($div[0]).appendTo(elt)
@@ -847,8 +841,7 @@
   }
 
 })();
-
-/**
+/**
  * 这里编写一些高级用法，可以快速完成一套动作（跟踪/查找url/显示下载按钮/显示popup)
  */
 (function() {
@@ -913,8 +906,7 @@
   }
 
 })();
-
-(function() {
+(function() {
 
     // 在这里提供通用的一些检查元素的方法
     function trackDOMElements(selector, callback) {
@@ -953,6 +945,7 @@
         $div.addClass('right-top')
     }
     // $div.click(onClick);
+    // element.appendChild($div[0])
     $div.click(function() {
         event.stopPropagation();
         event.preventDefault();
@@ -960,7 +953,6 @@
         onClick()
     });
     jQuery($div[0]).appendTo(element)
-    // element.appendChild($div[0])
     jQuery(document).on('DOMNodeRemoved', '#' + uuid, function() {
         showDownloadBtn(element, params, onClick)
     })
