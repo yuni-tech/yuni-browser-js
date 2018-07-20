@@ -192,5 +192,9 @@
             JSBridge.Browser.download(options)
         } 
     }
-
+    YNBrowser.bgImgUrl=function(tag){//处理图片为背景图片
+        tag = /^url\((['"]?)(.*)\1\)$/.exec(tag);
+        tag = tag ? tag[2] : "";
+        return tag;
+    }
 })();

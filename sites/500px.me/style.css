@@ -1,0 +1,58 @@
+.following_tab .photo_activity_item .photo_activity_item__details_top_right{/*关注按钮布局有问题调整*/
+    float:none;
+}
+#hellobarNew.tm .inside>div.applink .button,
+.single-photo-detail-mobile-container .comment-region .dropdown-div,
+.single-photo-detail-mobile-container .footer-region,
+#hellobarNew .inside>div.applink .button{
+    display:none;
+}
+body{
+    margin-bottom:100px;
+}
+.activity_tab .photo_activity_item .imgSuperCmp .group_num, .following_tab .photo_activity_item .imgSuperCmp .group_num, .notifications_tab .photo_activity_item .imgSuperCmp .group_num{
+    left:10px;
+}
+/* .full-aspect-ratio-photo-grid .photo_thumbnail .group_b{
+    top:2px;
+    left:2px;
+} */
+.following_tab .photo_activity_item{
+    position: relative;
+}
+.following_tab .photo_activity_item .yn-btn-save.right-top{
+    top:90px;
+}
+.full-aspect-ratio-photo-grid>.justified-gallery>.photo_thumbnail .yn-btn-save.right-top{
+    right:2px;
+    top:2px;
+}
+.full-aspect-ratio-photo-grid>.justified-gallery>.photo_thumbnail .yn-btn-save.right-bottom{
+    right:2px;
+    bottom:2px;
+}
+#hellobarNew.tm,
+.search_main_container .search_users_body .sets_body .px_card .link_wrap,
+.member-group-list-container.search_user_grid_items .px_card .link_wrap,
+.story_container .lists .abstract .link_wrap,
+.galleries_body__grid_region .px_card .link_wrap,
+.story_container .cardLists .card .link_wrap,
+.photo_grid_region_contest_v3 .px_card .link_wrap,
+.setList .px_card .link_wrap{
+    z-index:98;
+}
+#hellobarNew.tm{
+    width: auto;
+}
+.yn-title{
+    text-align:left;
+}
+.tribe-detail-container .following_tab .photo_activity_item .yn-btn-save.right-top{
+    top:10px;
+}
+.discovery-story-list-region .lists .yn-btn-save,.search_main_container .lists .yn-btn-save{
+    margin:10px 10px 0 0;
+}
+.discovery-story-list-region .lists,.search_main_container .lists{
+    position: relative;
+}

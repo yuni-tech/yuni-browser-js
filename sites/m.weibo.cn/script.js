@@ -22,9 +22,7 @@ function appendDownloadBtn(type, selector,pasrams, savedatas, title, onClick) {
             //如果保存按钮不存在
             urlTag.each(function(index, item) {
                 var url='',desc='';
-                var tag=jQuery(item).find('.f-bg-img').css("backgroundImage");
-                tag = /^url\((['"]?)(.*)\1\)$/.exec(tag);
-                tag = tag ? tag[2] : "";
+                var tag=YNBrowser.bgImgUrl(jQuery(item).find('.f-bg-img').css("backgroundImage"))
                 // orj360--缩略图   large--原图
                 url = tag.replace(/\/orj360\//,'/large/'); 
                 desc=jQuery('.weibo-text').text();
