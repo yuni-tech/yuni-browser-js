@@ -32,7 +32,7 @@ YNBrowser.ready(function() {
           YNBrowser.save(url)
           break
         case 'system':
-          JSBBridge.Browser.saveToSystemAlbum({ url: url })
+          JSBridge.Browser.saveToSystemAlbum({ url: url })
           break
       }
     })
