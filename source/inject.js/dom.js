@@ -37,11 +37,13 @@
         '<div class="yn-title">' + title + '</div>',
       '</div>'
     ]
+    let $dom = jQuery(tpl.join(''))
     if(selecter){
-      jQuery(tpl.join('')).appendTo(selecter)
+      $dom.appendTo(selecter)
     }else{
-      jQuery(tpl.join('')).appendTo(document.body)
+      $dom.appendTo(document.body)
     }
+    setTimeout(() => $dom.remove(), 3000)
   }
 
   YNBrowser.showSavePopup = function(options,selecter) {

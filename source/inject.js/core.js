@@ -42,16 +42,20 @@
 
     YNBrowser.importJS = importJS
     YNBrowser.isReady = false
-    YNBrowser.readyCallback = function() {}
+    YNBrowser.readyCallbacks = []
     YNBrowser.ready = function(func) {
-        YNBrowser.readyCallback = func
+        YNBrowser.readyCallbacks.push(func)
         callReady()
     }
 
     function callReady() {
         if (YNBrowser.isReady) {
-            YNBrowser.readyCallback && YNBrowser.readyCallback()
-            YNBrowser.readyCallback = null
+            YNBrowser.readyCallbacks.forEach((callback) => {
+                if (typeof callback == 'function') {
+                    setTimeout(callback, 1)
+                }
+            })
+            YNBrowser.readyCallbacks.length = 0
         }
     }
 
@@ -137,6 +141,20 @@
             }
         })
         script.addEventListener('load', function() {
+            scriptReady = true
+            if (linkReady && scriptReady) {
+                YNBrowser.isReady = true
+                callReady()
+            }
+        })
+
+        link.addEventListener('error', function() {
+            linkReady = true
+            if (linkReady && scriptReady) {
+                YNBrowser.ready && YNBrowser.ready()
+            }
+        })
+        script.addEventListener('error', function() {
             scriptReady = true
             if (linkReady && scriptReady) {
                 YNBrowser.isReady = true

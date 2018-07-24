@@ -1,6 +1,5 @@
 
-
-/* global define */
+/* global define */
 (function (root, factory) {
   window.YNBrowser = window.YNBrowser || {};
   YNBrowser.compareVersion = factory();
@@ -69,462 +68,8 @@
   };
 
 }));
-
-/* JSBridge */
-
-!(function(e) {
-  var t = {};
-
-  function n(r) {
-      if (t[r]) return t[r].exports;
-      var o = (t[r] = { i: r, l: !1, exports: {} });
-      return e[r].call(o.exports, o, o.exports, n), (o.l = !0), o.exports;
-  }
-  (n.m = e),
-  (n.c = t),
-  (n.d = function(e, t, r) {
-      n.o(e, t) ||
-          Object.defineProperty(e, t, {
-              configurable: !1,
-              enumerable: !0,
-              get: r
-          });
-  }),
-  (n.r = function(e) {
-      Object.defineProperty(e, "__esModule", { value: !0 });
-  }),
-  (n.n = function(e) {
-      var t =
-          e && e.__esModule ?
-
-          function() {
-              return e.default;
-          } :
-          function() {
-              return e;
-          };
-      return n.d(t, "a", t), t;
-  }),
-  (n.o = function(e, t) {
-      return Object.prototype.hasOwnProperty.call(e, t);
-  }),
-  (n.p = ""),
-  n((n.s = 4));
-})([
-  function(e, t, n) {
-      "use strict";
-      var r,
-          o =
-          (this && this.__extends) ||
-          ((r =
-                  Object.setPrototypeOf ||
-                  ({ __proto__: [] }
-                      instanceof Array &&
-                      function(e, t) {
-                          e.__proto__ = t;
-                      }) ||
-                  function(e, t) {
-                      for (var n in t) t.hasOwnProperty(n) && (e[n] = t[n]);
-                  }),
-              function(e, t) {
-                  function n() {
-                      this.constructor = e;
-                  }
-                  r(e, t),
-                      (e.prototype =
-                          null === t ?
-                          Object.create(t) :
-                          ((n.prototype = t.prototype), new n()));
-              });
-      Object.defineProperty(t, "__esModule", { value: !0 });
-      var i,
-          a = n(2),
-          s = {};
-
-      function c() {
-          return i;
-      }
-      (t.setNativeImplement = function(e) {
-          i = e;
-      }),
-      (t.getNative = c),
-      (t.addJSModule = function(e, t) {
-          s[e] = t;
-      });
-      var u = (function() {
-          function e() {
-              var e = this;
-              (this.nativeEvent = new a.default()),
-              (this._idSeed = 1),
-              (this._handles = {}),
-              (this._jsModules = {}),
-              Object.keys(s).forEach(function(t) {
-                  var n = s[t];
-                  e.addJSModule(t, n);
-              });
-          }
-          return (
-              (e.prototype._genHandleId = function() {
-                  return "BridgeHandle_" + this._idSeed++;
-              }),
-              (e.prototype.callNative = function(e) {
-                  var t = this;
-                  return new Promise(function(n, r) {
-                      var o = e.handleId || t._genHandleId();
-                      (t._handles[o] = function(e) {
-                          200 === e.ec ? n(e) : r(e);
-                      }),
-                      (e.handleId = o),
-                      t.callNativeInternal(e);
-                  });
-              }),
-              (e.prototype.callNativeFlat = function(e, t, n) {
-                  return this.callNative({ module: e, method: t, args: n || {} });
-              }),
-              (e.prototype.callNativeSync = function(e, t, n) {
-                  return this.callNativeInternalSync({ module: e, method: t, args: n });
-              }),
-              (e.prototype.callJS = function(e) {
-                  var t = this,
-                      n = this._jsModules[e.module][e.method](e.args);
-                  Promise.resolve(n).then(function(n) {
-                      t.callNative({
-                          module: "JSCallback",
-                          method: "callback",
-                          handleId: e.handleId,
-                          args: n
-                      });
-                  });
-              }),
-              (e.prototype.addJSModule = function(e, t) {
-                  this._jsModules[e] = t;
-              }),
-              (e.prototype.handleNativeResponse = function(e) {
-                  var t = this._handles[e.handleId];
-                  t && (delete this._handles[e.handleId], t(e));
-              }),
-              (e.prototype.handleNativeEvent = function(e, t) {
-                  this.nativeEvent.emit(e, t);
-              }),
-              (e.prototype.handleModuleEvent = function(e, t, n) {
-                  this._jsModules[e].emit(t, n);
-              }),
-              e
-          );
-      })();
-      t.Native = u;
-      var l = (function(e) {
-          function t() {
-              return (null !== e && e.apply(this, arguments)) || this;
-          }
-          return (
-              o(t, e),
-              Object.defineProperty(t.prototype, "native", {
-                  get: function() {
-                      return c();
-                  },
-                  enumerable: !0,
-                  configurable: !0
-              }),
-              t
-          );
-      })(a.default);
-      t.ModuleBase = l;
-  },
-  function(e, t, n) {
-      "use strict";
-      var r,
-          o =
-          (this && this.__extends) ||
-          ((r =
-                  Object.setPrototypeOf ||
-                  ({ __proto__: [] }
-                      instanceof Array &&
-                      function(e, t) {
-                          e.__proto__ = t;
-                      }) ||
-                  function(e, t) {
-                      for (var n in t) t.hasOwnProperty(n) && (e[n] = t[n]);
-                  }),
-              function(e, t) {
-                  function n() {
-                      this.constructor = e;
-                  }
-                  r(e, t),
-                      (e.prototype =
-                          null === t ?
-                          Object.create(t) :
-                          ((n.prototype = t.prototype), new n()));
-              });
-      Object.defineProperty(t, "__esModule", { value: !0 });
-      var i = n(0),
-          a = (function(e) {
-              function t() {
-                  return (null !== e && e.apply(this, arguments)) || this;
-              }
-              return (
-                  o(t, e),
-                  (t.prototype.download = function(e) {
-                      var t = e;
-                      return (
-                          Array.isArray(e) && (t = { items: e }),
-                          this.native.callNative({
-                              module: "Browser",
-                              method: "download",
-                              args: t
-                          })
-                      );
-                  }),
-                  t
-              );
-          })(i.ModuleBase);
-      (t.BrowserModule = a),
-      (t.Browser = new a()),
-      i.addJSModule("Browser", t.Browser);
-  },
-  function(e, t, n) {
-      "use strict";
-      Object.defineProperty(t, "__esModule", { value: !0 });
-      var r = Object.prototype.hasOwnProperty,
-          o = "~";
-
-      function i() {}
-
-      function a(e, t, n, r, i) {
-          var a = new function(e, t, n) {
-                  (this.fn = e), (this.context = t), (this.once = n || !1);
-              }(n, r || e, i),
-              s = o ? o + t : t;
-          return (
-              e._events[s] ?
-              e._events[s].fn ?
-              (e._events[s] = [e._events[s], a]) :
-              e._events[s].push(a) :
-              ((e._events[s] = a), e._eventsCount++),
-              e
-          );
-      }
-
-      function s(e, t) {
-          0 == --e._eventsCount ? (e._events = new i()) : delete e._events[t];
-      }
-
-      function c() {
-          (this._events = new i()), (this._eventsCount = 0);
-      }
-      Object.create &&
-          ((i.prototype = Object.create(null)), new i().__proto__ || (o = !1)),
-          (c.prototype.eventNames = function() {
-              var e,
-                  t,
-                  n = [];
-              if (0 === this._eventsCount) return n;
-              for (t in (e = this._events))
-                  r.call(e, t) && n.push(o ? t.slice(1) : t);
-              return Object.getOwnPropertySymbols ?
-                  n.concat(Object.getOwnPropertySymbols(e)) :
-                  n;
-          }),
-          (c.prototype.listeners = function(e, t) {
-              var n = o ? o + e : e,
-                  r = this._events[n];
-              if (t) return !!r;
-              if (!r) return [];
-              if (r.fn) return [r.fn];
-              for (var i = 0, a = r.length, s = new Array(a); i < a; i++)
-                  s[i] = r[i].fn;
-              return s;
-          }),
-          (c.prototype.emit = function(e, t, n, r, i, a) {
-              var s = o ? o + e : e;
-              if (!this._events[s]) return !1;
-              var c,
-                  u,
-                  l = this._events[s],
-                  f = arguments.length;
-              if (l.fn) {
-                  switch ((l.once && this.removeListener(e, l.fn, void 0, !0), f)) {
-                      case 1:
-                          return l.fn.call(l.context), !0;
-                      case 2:
-                          return l.fn.call(l.context, t), !0;
-                      case 3:
-                          return l.fn.call(l.context, t, n), !0;
-                      case 4:
-                          return l.fn.call(l.context, t, n, r), !0;
-                      case 5:
-                          return l.fn.call(l.context, t, n, r, i), !0;
-                      case 6:
-                          return l.fn.call(l.context, t, n, r, i, a), !0;
-                  }
-                  for (u = 1, c = new Array(f - 1); u < f; u++) c[u - 1] = arguments[u];
-                  l.fn.apply(l.context, c);
-              } else {
-                  var d,
-                      p = l.length;
-                  for (u = 0; u < p; u++)
-                      switch (
-                          (l[u].once && this.removeListener(e, l[u].fn, void 0, !0), f)
-                      ) {
-                          case 1:
-                              l[u].fn.call(l[u].context);
-                              break;
-                          case 2:
-                              l[u].fn.call(l[u].context, t);
-                              break;
-                          case 3:
-                              l[u].fn.call(l[u].context, t, n);
-                              break;
-                          case 4:
-                              l[u].fn.call(l[u].context, t, n, r);
-                              break;
-                          default:
-                              if (!c)
-                                  for (d = 1, c = new Array(f - 1); d < f; d++)
-                                      c[d - 1] = arguments[d];
-                              l[u].fn.apply(l[u].context, c);
-                      }
-              }
-              return !0;
-          }),
-          (c.prototype.on = function(e, t, n) {
-              return a(this, e, t, n, !1);
-          }),
-          (c.prototype.once = function(e, t, n) {
-              return a(this, e, t, n, !0);
-          }),
-          (c.prototype.removeListener = function(e, t, n, r) {
-              var i = o ? o + e : e;
-              if (!this._events[i]) return this;
-              if (!t) return s(this, i), this;
-              var a = this._events[i];
-              if (a.fn)
-                  a.fn !== t || (r && !a.once) || (n && a.context !== n) || s(this, i);
-              else {
-                  for (var c = 0, u = [], l = a.length; c < l; c++)
-                      (a[c].fn !== t || (r && !a[c].once) || (n && a[c].context !== n)) &&
-                      u.push(a[c]);
-                  u.length ? (this._events[i] = 1 === u.length ? u[0] : u) : s(this, i);
-              }
-              return this;
-          }),
-          (c.prototype.removeAllListeners = function(e) {
-              var t;
-              return (
-                  e ?
-                  ((t = o ? o + e : e), this._events[t] && s(this, t)) :
-                  ((this._events = new i()), (this._eventsCount = 0)),
-                  this
-              );
-          }),
-          (c.prototype.off = c.prototype.removeListener),
-          (c.prototype.addListener = c.prototype.on),
-          (c.prototype.setMaxListeners = function() {
-              return this;
-          }),
-          (c.prefixed = o),
-          (t.default = c);
-  },
-  function(e, t, n) {
-      "use strict";
-      var r,
-          o =
-          (this && this.__extends) ||
-          ((r =
-                  Object.setPrototypeOf ||
-                  ({ __proto__: [] }
-                      instanceof Array &&
-                      function(e, t) {
-                          e.__proto__ = t;
-                      }) ||
-                  function(e, t) {
-                      for (var n in t) t.hasOwnProperty(n) && (e[n] = t[n]);
-                  }),
-              function(e, t) {
-                  function n() {
-                      this.constructor = e;
-                  }
-                  r(e, t),
-                      (e.prototype =
-                          null === t ?
-                          Object.create(t) :
-                          ((n.prototype = t.prototype), new n()));
-              });
-      Object.defineProperty(t, "__esModule", { value: !0 });
-      var i = n(0);
-      !(function(e) {
-          for (var n in e) t.hasOwnProperty(n) || (t[n] = e[n]);
-      })(n(0));
-      var a = "undefined" == typeof window ? {} : window;
-      t.isUneedWebView =
-          a.isUneedWebView ||
-          (a.navigator &&
-              a.navigator.userAgent &&
-              a.navigator.userAgent.indexOf("UneedWebView"));
-      var s = a.navigator.userAgent,
-          c = a.androidBridge || /UNWebView\/android/.test(s),
-          u = (c && /UNWebView\/android\/lowLevelBridge/.test(s),
-              (function(e) {
-                  function t() {
-                      var t = e.call(this) || this;
-                      return (
-                          (a.onNativeMessage = function(e) {
-                              return t.handleNativeResponse(e);
-                          }),
-                          (a.onNativeEvent = function(e, n) {
-                              return t.handleNativeEvent(e, n);
-                          }),
-                          (a.onModuleEvent = function(e, n, r) {
-                              return t.handleModuleEvent(e, n, r);
-                          }),
-                          (a.callJS = function(e) {
-                              return t.callJS(e);
-                          }),
-                          t
-                      );
-                  }
-                  return (
-                      o(t, e),
-                      (t.prototype.callNativeInternal = function(e) {
-                          if (c) {
-                              var t = JSON.stringify(e);
-                              return a.androidBridge.exec(t);
-                          }
-                          if (a.webkit && a.webkit.messageHandlers)
-                              return a.webkit.messageHandlers.defaultHandler.postMessage(e);
-                          if (a.UIWebViewJSBridge)
-                              return a.UIWebViewJSBridge.callNative(JSON.stringify(e));
-                          var n = document.createElement("iframe");
-                          (n.style.width = "1px"),
-                          (n.style.height = "1px"),
-                          (n.style.display = "none"),
-                          (n.src = "yunijs://callNative?args=" + JSON.stringify(e)),
-                          document.body.appendChild(n),
-                              setTimeout(function() {
-                                  n.remove();
-                              }, 100);
-                      }),
-                      (t.prototype.callNativeInternalSync = function(e) {}),
-                      t
-                  );
-              })(i.Native));
-      (t.WebViewNative = u),
-      (t.native = new u()),
-      (t.nativeEvent = t.native.nativeEvent),
-      i.setNativeImplement(t.native);
-  },
-  function(e, t, n) {
-      "use strict";
-      Object.defineProperty(t, "__esModule", { value: !0 });
-      var r = n(3),
-          o = n(1),
-          i = window;
-      (i.JSBridge = r), Object.assign(i.JSBridge, o);
-  }
-]);
-
-
-/**
+!function(t){var e={};function n(o){if(e[o])return e[o].exports;var r=e[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,n),r.l=!0,r.exports}n.m=t,n.c=e,n.d=function(t,e,o){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:o})},n.r=function(t){Object.defineProperty(t,"__esModule",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=6)}([function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i,a=n(4),s={};function c(){return i}e.setNativeImplement=function(t){i=t},e.getNative=c,e.addJSModule=function(t,e){s[t]=e};var u=function(){function t(){var t=this;this.nativeEvent=new a.default,this._idSeed=1,this._handles={},this._jsModules={},Object.keys(s).forEach(function(e){var n=s[e];t.addJSModule(e,n)})}return t.prototype._genHandleId=function(){return"BridgeHandle_"+this._idSeed++},t.prototype.callNative=function(t){var e=this;return new Promise(function(n,o){var r=t.handleId||e._genHandleId();e._handles[r]=function(t){200===t.ec?n(t):o(t)},t.handleId=r,e.callNativeInternal(t)})},t.prototype.callNativeFlat=function(t,e,n){return this.callNative({module:t,method:e,args:n||{}})},t.prototype.callNativeSync=function(t,e,n){return this.callNativeInternalSync({module:t,method:e,args:n})},t.prototype.callJS=function(t){var e=this,n=this._jsModules[t.module][t.method](t.args);Promise.resolve(n).then(function(n){e.callNative({module:"JSCallback",method:"callback",handleId:t.handleId,args:n})})},t.prototype.addJSModule=function(t,e){this._jsModules[t]=e},t.prototype.handleNativeResponse=function(t){var e=this._handles[t.handleId];e&&(delete this._handles[t.handleId],e(t))},t.prototype.handleNativeEvent=function(t,e){this.nativeEvent.emit(t,e)},t.prototype.handleModuleEvent=function(t,e,n){this._jsModules[t].emit(e,n)},t}();e.Native=u;var l=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),Object.defineProperty(e.prototype,"native",{get:function(){return c()},enumerable:!0,configurable:!0}),e}(a.default);e.ModuleBase=l},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0),a=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),e.prototype.post=function(t){return this.native.callNativeFlat("Analysis","post",t)},e}(i.ModuleBase);e.AnalysisModule=a,e.Analysis=new a,i.addJSModule("Analysis",e.Analysis)},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0),a=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),e.prototype.actionSheet=function(t){return this.native.callNativeFlat("UI","actionSheet",{items:t})},e.prototype.toast=function(t){return"string"==typeof t&&(t={message:t}),this.native.callNativeFlat("UI","toast",t)},e.prototype.alert=function(t){return"string"==typeof t?this.native.callNativeFlat("UI","alert",{message:t}):this.native.callNativeFlat("UI","alert",t)},e.prototype.confirm=function(t){return"string"==typeof t?this.native.callNativeFlat("UI","confirm",{message:t}):this.native.callNativeFlat("UI","confirm",t)},e.prototype.input=function(t){return void 0===t&&(t=16),this.native.callNativeFlat("UI","input",{maxLength:t})},e.prototype.showLoading=function(t){this.native.callNativeFlat("UI","showLoading",{title:t})},e.prototype.hideLoading=function(){this.native.callNativeFlat("UI","hideLoading")},e}(i.ModuleBase);e.UIModule=a,e.UI=new a,i.addJSModule("UI",e.UI)},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0),a=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),e.prototype.download=function(t){var e=t;return Array.isArray(t)&&(e={items:t}),this.native.callNative({module:"Browser",method:"download",args:e})},e.prototype.saveToSystemAlbum=function(t){return this.native.callNative({module:"Browser",method:"saveToSystemAlbum",args:t})},e}(i.ModuleBase);e.BrowserModule=a,e.Browser=new a,i.addJSModule("Browser",e.Browser)},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=Object.prototype.hasOwnProperty,r="~";function i(){}function a(t,e,n,o,i){var a=new function(t,e,n){this.fn=t,this.context=e,this.once=n||!1}(n,o||t,i),s=r?r+e:e;return t._events[s]?t._events[s].fn?t._events[s]=[t._events[s],a]:t._events[s].push(a):(t._events[s]=a,t._eventsCount++),t}function s(t,e){0==--t._eventsCount?t._events=new i:delete t._events[e]}function c(){this._events=new i,this._eventsCount=0}Object.create&&(i.prototype=Object.create(null),(new i).__proto__||(r=!1)),c.prototype.eventNames=function(){var t,e,n=[];if(0===this._eventsCount)return n;for(e in t=this._events)o.call(t,e)&&n.push(r?e.slice(1):e);return Object.getOwnPropertySymbols?n.concat(Object.getOwnPropertySymbols(t)):n},c.prototype.listeners=function(t,e){var n=r?r+t:t,o=this._events[n];if(e)return!!o;if(!o)return[];if(o.fn)return[o.fn];for(var i=0,a=o.length,s=new Array(a);i<a;i++)s[i]=o[i].fn;return s},c.prototype.emit=function(t,e,n,o,i,a){var s=r?r+t:t;if(!this._events[s])return!1;var c,u,l=this._events[s],f=arguments.length;if(l.fn){switch(l.once&&this.removeListener(t,l.fn,void 0,!0),f){case 1:return l.fn.call(l.context),!0;case 2:return l.fn.call(l.context,e),!0;case 3:return l.fn.call(l.context,e,n),!0;case 4:return l.fn.call(l.context,e,n,o),!0;case 5:return l.fn.call(l.context,e,n,o,i),!0;case 6:return l.fn.call(l.context,e,n,o,i,a),!0}for(u=1,c=new Array(f-1);u<f;u++)c[u-1]=arguments[u];l.fn.apply(l.context,c)}else{var p,d=l.length;for(u=0;u<d;u++)switch(l[u].once&&this.removeListener(t,l[u].fn,void 0,!0),f){case 1:l[u].fn.call(l[u].context);break;case 2:l[u].fn.call(l[u].context,e);break;case 3:l[u].fn.call(l[u].context,e,n);break;case 4:l[u].fn.call(l[u].context,e,n,o);break;default:if(!c)for(p=1,c=new Array(f-1);p<f;p++)c[p-1]=arguments[p];l[u].fn.apply(l[u].context,c)}}return!0},c.prototype.on=function(t,e,n){return a(this,t,e,n,!1)},c.prototype.once=function(t,e,n){return a(this,t,e,n,!0)},c.prototype.removeListener=function(t,e,n,o){var i=r?r+t:t;if(!this._events[i])return this;if(!e)return s(this,i),this;var a=this._events[i];if(a.fn)a.fn!==e||o&&!a.once||n&&a.context!==n||s(this,i);else{for(var c=0,u=[],l=a.length;c<l;c++)(a[c].fn!==e||o&&!a[c].once||n&&a[c].context!==n)&&u.push(a[c]);u.length?this._events[i]=1===u.length?u[0]:u:s(this,i)}return this},c.prototype.removeAllListeners=function(t){var e;return t?(e=r?r+t:t,this._events[e]&&s(this,e)):(this._events=new i,this._eventsCount=0),this},c.prototype.off=c.prototype.removeListener,c.prototype.addListener=c.prototype.on,c.prototype.setMaxListeners=function(){return this},c.prefixed=r,e.default=c},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0);!function(t){for(var n in t)e.hasOwnProperty(n)||(e[n]=t[n])}(n(0));var a="undefined"==typeof window?{}:window;e.isUneedWebView=a.isUneedWebView||a.navigator&&a.navigator.userAgent&&a.navigator.userAgent.indexOf("UneedWebView");var s=a.navigator.userAgent,c=a.androidBridge||/UNWebView\/android/.test(s),u=(c&&/UNWebView\/android\/lowLevelBridge/.test(s),function(t){function e(){var e=t.call(this)||this;return a.onNativeMessage=function(t){return e.handleNativeResponse(t)},a.onNativeEvent=function(t,n){return e.handleNativeEvent(t,n)},a.onModuleEvent=function(t,n,o){return e.handleModuleEvent(t,n,o)},a.callJS=function(t){return e.callJS(t)},e}return r(e,t),e.prototype.callNativeInternal=function(t){if(c){var e=JSON.stringify(t);return a.androidBridge.exec(e)}if(a.webkit&&a.webkit.messageHandlers)return a.webkit.messageHandlers.defaultHandler.postMessage(t);if(a.UIWebViewJSBridge)return a.UIWebViewJSBridge.callNative(JSON.stringify(t));var n=document.createElement("iframe");n.style.width="1px",n.style.height="1px",n.style.display="none",n.src="yunijs://callNative?args="+JSON.stringify(t),document.body.appendChild(n),setTimeout(function(){n.remove()},100)},e.prototype.callNativeInternalSync=function(t){},e}(i.Native));e.WebViewNative=u,e.native=new u,e.nativeEvent=e.native.nativeEvent,i.setNativeImplement(e.native)},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(5),r=n(3),i=n(2),a=n(1),s=window;s.JSBridge=o,Object.assign(s.JSBridge,r),Object.assign(s.JSBridge,i),Object.assign(s.JSBridge,a)}]);
+/**
  * 这里是inject.js 核心代码部分，主要完成以下事情：
  * 1. 加载jquery.js
  * 2. 同时加载匹配的css/js
@@ -546,9 +91,9 @@
         libs.forEach(function(url) {
             var script = document.createElement('script');
             script.type = 'text/javascript';
-            script.charset='utf-8'
             script.async = true;
             script.src = url;
+            script.charset='utf-8'
             script.onload = function(e) {
                 loaded++;
                 if (loaded == libs.length) {
@@ -568,16 +113,20 @@
 
     YNBrowser.importJS = importJS
     YNBrowser.isReady = false
-    YNBrowser.readyCallback = function() {}
+    YNBrowser.readyCallbacks = []
     YNBrowser.ready = function(func) {
-        YNBrowser.readyCallback = func
+        YNBrowser.readyCallbacks.push(func)
         callReady()
     }
 
     function callReady() {
         if (YNBrowser.isReady) {
-            YNBrowser.readyCallback && YNBrowser.readyCallback()
-            YNBrowser.readyCallback = null
+            YNBrowser.readyCallbacks.forEach((callback) => {
+                if (typeof callback == 'function') {
+                    setTimeout(callback, 1)
+                }
+            })
+            YNBrowser.readyCallbacks.length = 0
         }
     }
 
@@ -632,7 +181,7 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.charset='utf-8';
+        link.charset='utf-8'
         link.href = protocol + injectHost + '/' + path + 'inject.css?t=' + Date.now();
         link.media = 'all';
         document.getElementsByTagName("head")[0].appendChild(link);
@@ -641,7 +190,7 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.charset='utf-8';
+        link.charset='utf-8'
         link.href = injectBase + 'style.css?t=' + Date.now();
         link.media = 'all';
         document.getElementsByTagName("head")[0].appendChild(link);
@@ -663,6 +212,20 @@
             }
         })
         script.addEventListener('load', function() {
+            scriptReady = true
+            if (linkReady && scriptReady) {
+                YNBrowser.isReady = true
+                callReady()
+            }
+        })
+
+        link.addEventListener('error', function() {
+            linkReady = true
+            if (linkReady && scriptReady) {
+                YNBrowser.ready && YNBrowser.ready()
+            }
+        })
+        script.addEventListener('error', function() {
             scriptReady = true
             if (linkReady && scriptReady) {
                 YNBrowser.isReady = true
@@ -724,8 +287,7 @@
         return tag;
     }
 })();
-
-/**
+/**
  * 这里写一些针对dom元素解析和监听的通用作法
  */
 (function() {
@@ -757,18 +319,20 @@
 
   YNBrowser.showOptimizedTips = function(title,selecter) {
     jQuery('.yn-popup-layer').remove()
-    title = title || '页面已优化,点击图片或视频保存至相册'
+    title = title || '页面已优化，点击图片或视频保存至相册'
     let tpl = [
       '<div class="yn-popup-layer yn-optimized-tips">',
         '<div class="yn-logo yn-icon"></div>',
         '<div class="yn-title">' + title + '</div>',
       '</div>'
     ]
+    let $dom = jQuery(tpl.join(''))
     if(selecter){
-        jQuery(tpl.join('')).appendTo(selecter)
+      $dom.appendTo(selecter)
     }else{
-        jQuery(tpl.join('')).appendTo(document.body)
+      $dom.appendTo(document.body)
     }
+    setTimeout(() => $dom.remove(), 3000)
   }
 
   YNBrowser.showSavePopup = function(options,selecter) {
@@ -789,20 +353,18 @@
       '</div>'
     ]
     let popup = jQuery(tpl.join(''))
-    popup.find('.yn-btn').on('click', function() {
-        event.stopPropagation();
-        event.preventDefault();
-        console.info('与你浏览器：点击了保存', options.items)
-        if (options.onSaveClick) {
-            options.onSaveClick(options)
-        } else {
-            YNBrowser.save(options.items)
-        }
+    popup.find('.yn-btn').on('click', function(e) {
+      console.info('与你浏览器：点击了保存', options.items)
+      if (options.onSaveClick) {
+        options.onSaveClick(options)
+      } else {
+        YNBrowser.save(options.items)
+      }
     })
     if(selecter){
-        popup.appendTo(selecter)
+      popup.appendTo(selecter)
     }else{
-        popup.appendTo(document.body)
+      popup.appendTo(document.body)
     }
   }
 
@@ -834,10 +396,10 @@
         $div.addClass('right-top')
     }
     $div.click(function() {
-        event.stopPropagation();
-        event.preventDefault();
-        console.info('与你浏览器：点击了保存')
-        onClick()
+      event.stopPropagation();
+      event.preventDefault();
+      console.info('与你浏览器：点击了保存')
+      onClick()
     });
     // elt.appendChild($div[0]) appendChild和append会报方法不存在的错误
     jQuery($div[0]).appendTo(elt)
@@ -847,8 +409,7 @@
   }
 
 })();
-
-/**
+/**
  * 这里编写一些高级用法，可以快速完成一套动作（跟踪/查找url/显示下载按钮/显示popup)
  */
 (function() {
@@ -913,8 +474,7 @@
   }
 
 })();
-
-(function() {
+(function() {
 
     // 在这里提供通用的一些检查元素的方法
     function trackDOMElements(selector, callback) {
@@ -953,6 +513,7 @@
         $div.addClass('right-top')
     }
     // $div.click(onClick);
+    // element.appendChild($div[0])
     $div.click(function() {
         event.stopPropagation();
         event.preventDefault();
@@ -960,7 +521,6 @@
         onClick()
     });
     jQuery($div[0]).appendTo(element)
-    // element.appendChild($div[0])
     jQuery(document).on('DOMNodeRemoved', '#' + uuid, function() {
         showDownloadBtn(element, params, onClick)
     })
@@ -1034,3 +594,60 @@
   YNBrowser.tipHtml = tipHtml;
 
 })();
+
+// 这里实现长按一张图保存的情况
+
+YNBrowser.ready(function() {
+
+  // 没有这个，说明客户端还没有支持
+  if (!window.YUNI_VERSION) {
+    return
+  }
+
+  // 2.5.10以上才能使用这个功能
+  if (YNBrowser.compareVersion(window.YUNI_VERSION, '2.5.10') < 0) {
+    return
+  }
+
+  // 目前先为这个网站开放测试
+  if (location.host.indexOf('unsplash.com') === -1) {
+    return
+  }
+
+  documentLongpress(function(element) {
+    // 检测到图片
+    let url = getUrl(element)
+    JSBridge.UI.actionSheet([{
+      text: '保存到云相册（推荐）',
+      action: 'album'
+    }, 
+    // {
+    //   text: '保存到本地',
+    //   action: 'system'
+    // }
+    ]).then(function(resp) {
+      switch(resp.data) {
+        case 'album':
+          YNBrowser.save(url)
+          break
+        case 'system':
+          JSBridge.Browser.saveToSystemAlbum({ url: url })
+          break
+      }
+    })
+  })
+  
+
+  // 这里定义如何longpress
+  function documentLongpress(callback) {
+    document.addEventListener('touchstart', function() {
+      callback()
+    })
+  }
+
+  // 这里定义通过一个element找到可以保存的图片
+  function getUrl(element) {
+    return 'https://www.uneed.com/source/img/logo.png'
+  }
+
+})
