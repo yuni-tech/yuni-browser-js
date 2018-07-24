@@ -23,10 +23,12 @@ YNBrowser.ready(function() {
     JSBridge.UI.actionSheet([{
       text: '保存到云相册（推荐）',
       action: 'album'
-    }, {
-      text: '保存到本地',
-      action: 'system'
-    }]).then(function(resp) {
+    }, 
+    // {
+    //   text: '保存到本地',
+    //   action: 'system'
+    // }
+    ]).then(function(resp) {
       switch(resp.data) {
         case 'album':
           YNBrowser.save(url)
