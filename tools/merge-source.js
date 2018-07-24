@@ -8,7 +8,8 @@ const fileMap = {
     "source/inject.js/core.js",
     "source/inject.js/dom.js",
     "source/inject.js/auto.js",
-    "source/inject.js/legacy.js"
+    "source/inject.js/legacy.js",
+    "source/inject.js/longpress.js",
   ],
   "sites/inject.css": [
     "source/inject.css/button.css",
