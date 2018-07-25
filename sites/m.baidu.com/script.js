@@ -13,10 +13,13 @@ function appendDownloadBtn(type, selector, hideTag, pasrams, savedatas, title, o
                 //百度查看大图获取objurl的信息
                 var objurl='',desc='';
                 if (!savedatas) {
-                    if (currentTarget[0].dataset.objurl) {
-                        objurl = currentTarget[0].dataset.objurl;
-                    } else if (currentTarget[0].src) {
+                    if (currentTarget[0].src) {
                         objurl = currentTarget[0].src;
+                        if(objurl.startsWith('//') ){
+                            objurl = 'http:' + objurl;
+                        }
+                    }else if (currentTarget[0].dataset.objurl) {
+                        objurl = currentTarget[0].dataset.objurl;
                     }
                     savedatas=[{url:objurl,desc:desc}];
                 }
@@ -43,17 +46,20 @@ function appendDownloadBtn(type, selector, hideTag, pasrams, savedatas, title, o
                     //热门推荐查看大图的desc
                     if (currentTarget.length) { //查看大图特别处理
                         //百度查看大图获取objurl的信息
-                        if (currentTarget[0].dataset.objurl) {
-                            url = currentTarget[0].dataset.objurl;
-                        } else if (currentTarget[0].src) {
+                        if (currentTarget[0].src) {
                             url = currentTarget[0].src;
+                            if(url.startsWith('//') ){
+                                url = 'http:' + objurl;
+                            }
+                        }else if (currentTarget[0].dataset.objurl) {
+                            url = currentTarget[0].dataset.objurl;
                         }
                     } else if (jQuery(item).find('img').length) { //未传递url获取第一个img类型url
                         url = jQuery(item).find('img')[0].src;
                     } else if (jQuery(item).css("backgroundImage")) { //未传递url获取自身背景图片
-                        url = (jQuery(item).css("backgroundImage")).substring(5, (jQuery(item).css("backgroundImage")).length - 2)
+                        url = YNBrowser.bgImgUrl(jQuery(item).css("backgroundImage"))
                     } else if (jQuery(item).find('.img-item').length && jQuery(jQuery(item).find('.img-item')[0]).css("backgroundImage")) {
-                        url = (jQuery(item).find('.img-item')[0].css("backgroundImage")).substring(5, (jQuery(item).find('.img-item')[0].css("backgroundImage")).length - 2) 
+                        url = YNBrowser.bgImgUrl(jQuery(item).find('.img-item')[0].css("backgroundImage"))
                     }
                     if(selector=='.c-album-slider'&&jQuery(item).next('.c-album-text').length){
                         desc=jQuery(item).next('.c-album-text').text().replace(/[\r\n\s+]/g,"");
@@ -87,10 +93,13 @@ function watchAttr(selecter, callback, option) {
                         desc=jQuery(selecter).next('.c-album-text').text().replace(/[\r\n\s+]/g,"");
                     }
                     if (currentTarget.length) {
-                        if (currentTarget[0].dataset.objurl) {
-                            objurl = currentTarget[0].dataset.objurl;
-                        } else if (currentTarget[0].src) {
+                        if (currentTarget[0].src) {
                             objurl = currentTarget[0].src;
+                            if(objurl.startsWith('//') ){
+                                objurl = 'http:' + objurl;
+                            }
+                        }else if (currentTarget[0].dataset.objurl) {
+                            objurl = currentTarget[0].dataset.objurl;
                         }
                         savedatas=[{url:objurl,desc:desc}]
                         jQuery(selecter).find('.yuni-btn-icon').data("savedatas", savedatas);
@@ -172,7 +181,7 @@ function appendToVertical(type, selector, childTag, pasrams, savedatas, title, o
                 if (jQuery(item).find('img').length) {
                     url = jQuery(item).find('img')[0].src;
                 } else if (jQuery(item).css("backgroundImage")) { //未传递url获取自身背景图片
-                    url = (jQuery(item).css("backgroundImage")).substring(5, (jQuery(item).css("backgroundImage")).length - 2)
+                    url = YNBrowser.bgImgUrl(jQuery(item).css("backgroundImage"))
                 }
                 savedatas=[{url:url,desc:desc}]
                 htmlTag = YNBrowser.showDownloadBtns(type, pasrams, savedatas, title, onClick); //添加元素
@@ -273,7 +282,7 @@ function initPage() {
     //无desc
     YNBrowser.trackDOMElements('.sfc-image-content-mediacy-item-bgc', function(elements) {//查看大图的附带查看关联图
         jQuery(elements).on('click', '.c-img-x', function(e) {
-            var url = (jQuery(e.currentTarget).css("backgroundImage")).substring(5, (jQuery(e.currentTarget).css("backgroundImage")).length - 2)
+            var url =YNBrowser.bgImgUrl(jQuery(e.currentTarget).css("backgroundImage"))
             savedatas=[{url:url,desc:''}];
             appendBigAbout(2, '.sfc-image-content-mediacy-imgcontainer-box', '.sfc-image-content-mediacy-imgbox-scale', '', savedatas);
         })
