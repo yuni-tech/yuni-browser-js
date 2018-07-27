@@ -201,11 +201,15 @@ YNBrowser.track('.graphic-content-container .graphic-main-content-region', funct
     }
 })
 //首页
+bgBtn('.zuopin_maincmp .full-aspect-ratio-photo-grid .grid-container .photo_thumbnail','img.copyright-contextmenu')//未登录
+bgBtn('.zuopin_maincmp .contest_maincmp .c__item','div[data-original]','.c__title')//未登录
+
 bgBtn('.galleries_layout','.image.copyright-contextmenu','.gallery_details__title')
 smallBtn('.main_body_album  .grid-container .photo_thumbnail','right-bottom')//影集
 showBtn('.following_tab .activity_item')//首页--关注
 showBtn('.following_tab .graphic-txt-item')//首页--关注
 showTip('.logged_in_home_layout__content_region .activity_tab ');
+showTip('.photo_grid_region .m_module_list');//推荐部落
 smallBtn('.photo_grid_region .full-aspect-ratio-photo-grid .photo_thumbnail','right-bottom')//我的转发/点赞
 //个人中心
 smallBtn('.lyby_userdetail .profile_body .photo_thumbnail','right-bottom')//代表作
@@ -233,7 +237,8 @@ bgBtn('#profiles_show .profile_header','.image','.mask-content h3')//头部
 
 bgBtn('.photo_grid_region_contest_v3 .quest_item','.top','.quest_card__quest_title')//活动列表  进行中,未进行,已结束
 
-smallBtn('.contest_detail_main .profile_body .photo_thumbnail')//全部作品
+smallBtn('.contest_detail_main .profile_body .photo_thumbnail','right-bottom')//全部作品
+bgBtn('.recommend_users_container .recommend_users .user_item','.top')//推荐摄影师
 bgBtn('.contest_detail_main .profile_header','.image','.mask-content h3')//头部
 
 // https://500px.me/community/discover?t=story
