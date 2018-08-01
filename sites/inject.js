@@ -656,10 +656,14 @@ YNBrowser.ready(function() {
     document.addEventListener('touchstart',touchFn)
     document.addEventListener('touchcancel',touchFn)
     var timeOutEvent=0;
+    var startX=0;
+    var startY=0;
     function touchFn(e){
         switch (e.type){
             case "touchstart" :  //500ms之后执行
                 if(e.touches && e.touches.length==1){
+                    startX=e.touches[0].pageX
+                    startY=e.touches[0].pageY
                     timeOutEvent = setTimeout(()=>{
                         callback(e)
                     },500)
@@ -668,7 +672,15 @@ YNBrowser.ready(function() {
                 }
                 break;
             default:
-                clearTimeout(timeOutEvent)
+                if(e.changedTouches&&e.changedTouches.length&&e.type!=='touchend'){
+                    var moveX=e.changedTouches[0].pageX
+                    var moveY=e.changedTouches[0].pageY
+                    if(Math.abs(moveX-startX)>10||Math.abs(moveY-startY)>10){
+                        clearTimeout(timeOutEvent)
+                    }
+                }else{
+                    clearTimeout(timeOutEvent)
+                }
                 break;
         }
     }
