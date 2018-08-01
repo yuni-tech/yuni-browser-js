@@ -650,38 +650,28 @@ YNBrowser.ready(function() {
 
   // 这里定义如何longpress
   function documentLongpress(callback) {
+    document.addEventListener('scroll',touchFn)
     document.addEventListener('touchmove',touchFn)
     document.addEventListener('touchend',touchFn)
     document.addEventListener('touchstart',touchFn)
     document.addEventListener('touchcancel',touchFn)
     var timeOutEvent=0;
-    var time=0;
+    // var time=0;
     function touchFn(e){
+        console.log(e.type)
         switch (e.type){
             case "touchstart" :  //500ms之后执行
-                var count=10;
+                // var count=10;
                 if(e.touches && e.touches.length==1){
-                    timeOutEvent=setInterval(function(){
-                        time+=count
-                        if(time>=500){
-                            e.stopPropagation();
-                            e.preventDefault();
-                            callback(e);
-                            clearInterval(timeOutEvent);
-                            timeOutEvent=0;
-                            time=0;
-                        }
-                    },count);
+                    timeOutEvent = setTimeout(()=>{
+                        callback(e)
+                    },500)
                 }else{
-                    clearInterval(timeOutEvent);
-                    timeOutEvent=0;
-                    time=0;
+                    clearTimeout(timeOutEvent)
                 }
                 break;
             default:
-                clearInterval(timeOutEvent);
-                timeOutEvent=0;
-                time=0;
+            clearTimeout(timeOutEvent)
                 break;
         }
     }
