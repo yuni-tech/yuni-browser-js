@@ -52,12 +52,9 @@ YNBrowser.ready(function() {
     document.addEventListener('touchstart',touchFn)
     document.addEventListener('touchcancel',touchFn)
     var timeOutEvent=0;
-    // var time=0;
     function touchFn(e){
-        console.log(e.type)
         switch (e.type){
             case "touchstart" :  //500ms之后执行
-                // var count=10;
                 if(e.touches && e.touches.length==1){
                     timeOutEvent = setTimeout(()=>{
                         callback(e)
@@ -67,7 +64,7 @@ YNBrowser.ready(function() {
                 }
                 break;
             default:
-            clearTimeout(timeOutEvent)
+                clearTimeout(timeOutEvent)
                 break;
         }
     }
