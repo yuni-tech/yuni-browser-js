@@ -659,20 +659,14 @@ YNBrowser.ready(function() {
     function touchFn(e){
         switch (e.type){
             case "touchstart" :  //500ms之后执行
-                var count=50;
+                var count=10;
                 if(e.touches && e.touches.length==1){
                     timeOutEvent=setInterval(function(){
-                        if(e.touches && e.touches.length==1){
-                            time+=count
-                            if(time>=500){
-                                e.stopPropagation();
-                                e.preventDefault();
-                                callback(e);
-                                clearInterval(timeOutEvent);
-                                timeOutEvent=0;
-                                time=0;
-                            }
-                        }else{
+                        time+=count
+                        if(time>=500){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            callback(e);
                             clearInterval(timeOutEvent);
                             timeOutEvent=0;
                             time=0;
