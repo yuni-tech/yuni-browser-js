@@ -659,6 +659,7 @@ YNBrowser.ready(function() {
     var startX=0;
     var startY=0;
     function touchFn(e){
+        jQuery(e.target).css({'-webkit-touch-callout':'none','-webkit-user-select':'none','-khtml-user-select':'none','-moz-user-select':'none','-ms-user-select':'none','user-select':'none'});
         switch (e.type){
             case "touchstart" :  //500ms之后执行
                 if(e.touches && e.touches.length==1){
