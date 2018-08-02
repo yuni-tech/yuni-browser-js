@@ -616,10 +616,10 @@ YNBrowser.ready(function() {
     return
   }
 
-  // 目前先为这个网站开放测试
-  // if (location.host.indexOf('unsplash.com') === -1) {
-  //   return
-  // }
+  // 目前屏蔽这个网站
+  if (location.host.indexOf('m.58pic.com') !== -1) {//千图网文字乱码
+    return
+  }
 
   documentLongpress(function(element) {
     // 检测到图片
@@ -669,7 +669,7 @@ YNBrowser.ready(function() {
                         e.preventDefault();
                         e.stopPropagation();
                         callback(e)
-                    },500)
+                    },450)
                 }else{
                     clearTimeout(timeOutEvent)
                 }

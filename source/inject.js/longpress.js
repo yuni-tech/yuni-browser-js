@@ -65,7 +65,7 @@ YNBrowser.ready(function() {
                         e.preventDefault();
                         e.stopPropagation();
                         callback(e)
-                    },500)
+                    },450)
                 }else{
                     clearTimeout(timeOutEvent)
                 }
