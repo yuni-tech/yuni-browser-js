@@ -623,12 +623,12 @@ YNBrowser.ready(function() {
 
   documentLongpress(function(element) {
     // 检测到图片
-    let url = getUrl(element);
+    let url = getUrl(element)
     if(!url || !url.startsWith('http')){//加入没有获取到url
-        return;
+      return;
     }
     JSBridge.UI.actionSheet([{
-      text: '保存到云相册',
+      text: '保存到云相册（推荐）',
       action: 'album'
     }
     // {
@@ -693,13 +693,13 @@ YNBrowser.ready(function() {
     if(element&&tag){
         var bg=jQuery(tag).css("backgroundImage");
         var img=jQuery(tag).attr("src");
-        if(img && typeof img==='string'){
+        if(img && typeof img === 'string'){
             url=img
-        }else if(bg && typeof bg==='string'){
+        }else if(bg && typeof bg === 'string'){
             url=YNBrowser.bgImgUrl(bg);
         }
         if(url.startsWith('//') ){
-            url = 'http:' + url;
+          url = 'http:' + url;
         }
     }
     return url;
