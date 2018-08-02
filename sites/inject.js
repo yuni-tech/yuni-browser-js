@@ -666,6 +666,8 @@ YNBrowser.ready(function() {
                     startX=e.touches[0].pageX
                     startY=e.touches[0].pageY
                     timeOutEvent = setTimeout(()=>{
+                        e.preventDefault();
+                        e.stopPropagation();
                         callback(e)
                     },500)
                 }else{
