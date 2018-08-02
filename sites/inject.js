@@ -1,5 +1,6 @@
 
-/* global define */
+
+/* global define */
 (function (root, factory) {
   window.YNBrowser = window.YNBrowser || {};
   YNBrowser.compareVersion = factory();
@@ -68,8 +69,10 @@
   };
 
 }));
-!function(t){var e={};function n(o){if(e[o])return e[o].exports;var r=e[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,n),r.l=!0,r.exports}n.m=t,n.c=e,n.d=function(t,e,o){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:o})},n.r=function(t){Object.defineProperty(t,"__esModule",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=6)}([function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i,a=n(4),s={};function c(){return i}e.setNativeImplement=function(t){i=t},e.getNative=c,e.addJSModule=function(t,e){s[t]=e};var u=function(){function t(){var t=this;this.nativeEvent=new a.default,this._idSeed=1,this._handles={},this._jsModules={},Object.keys(s).forEach(function(e){var n=s[e];t.addJSModule(e,n)})}return t.prototype._genHandleId=function(){return"BridgeHandle_"+this._idSeed++},t.prototype.callNative=function(t){var e=this;return new Promise(function(n,o){var r=t.handleId||e._genHandleId();e._handles[r]=function(t){200===t.ec?n(t):o(t)},t.handleId=r,e.callNativeInternal(t)})},t.prototype.callNativeFlat=function(t,e,n){return this.callNative({module:t,method:e,args:n||{}})},t.prototype.callNativeSync=function(t,e,n){return this.callNativeInternalSync({module:t,method:e,args:n})},t.prototype.callJS=function(t){var e=this,n=this._jsModules[t.module][t.method](t.args);Promise.resolve(n).then(function(n){e.callNative({module:"JSCallback",method:"callback",handleId:t.handleId,args:n})})},t.prototype.addJSModule=function(t,e){this._jsModules[t]=e},t.prototype.handleNativeResponse=function(t){var e=this._handles[t.handleId];e&&(delete this._handles[t.handleId],e(t))},t.prototype.handleNativeEvent=function(t,e){this.nativeEvent.emit(t,e)},t.prototype.handleModuleEvent=function(t,e,n){this._jsModules[t].emit(e,n)},t}();e.Native=u;var l=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),Object.defineProperty(e.prototype,"native",{get:function(){return c()},enumerable:!0,configurable:!0}),e}(a.default);e.ModuleBase=l},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0),a=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),e.prototype.post=function(t){return this.native.callNativeFlat("Analysis","post",t)},e}(i.ModuleBase);e.AnalysisModule=a,e.Analysis=new a,i.addJSModule("Analysis",e.Analysis)},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0),a=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),e.prototype.actionSheet=function(t){return this.native.callNativeFlat("UI","actionSheet",{items:t})},e.prototype.toast=function(t){return"string"==typeof t&&(t={message:t}),this.native.callNativeFlat("UI","toast",t)},e.prototype.alert=function(t){return"string"==typeof t?this.native.callNativeFlat("UI","alert",{message:t}):this.native.callNativeFlat("UI","alert",t)},e.prototype.confirm=function(t){return"string"==typeof t?this.native.callNativeFlat("UI","confirm",{message:t}):this.native.callNativeFlat("UI","confirm",t)},e.prototype.input=function(t){return void 0===t&&(t=16),this.native.callNativeFlat("UI","input",{maxLength:t})},e.prototype.showLoading=function(t){this.native.callNativeFlat("UI","showLoading",{title:t})},e.prototype.hideLoading=function(){this.native.callNativeFlat("UI","hideLoading")},e}(i.ModuleBase);e.UIModule=a,e.UI=new a,i.addJSModule("UI",e.UI)},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0),a=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),e.prototype.download=function(t){var e=t;return Array.isArray(t)&&(e={items:t}),this.native.callNative({module:"Browser",method:"download",args:e})},e.prototype.saveToSystemAlbum=function(t){return this.native.callNative({module:"Browser",method:"saveToSystemAlbum",args:t})},e}(i.ModuleBase);e.BrowserModule=a,e.Browser=new a,i.addJSModule("Browser",e.Browser)},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=Object.prototype.hasOwnProperty,r="~";function i(){}function a(t,e,n,o,i){var a=new function(t,e,n){this.fn=t,this.context=e,this.once=n||!1}(n,o||t,i),s=r?r+e:e;return t._events[s]?t._events[s].fn?t._events[s]=[t._events[s],a]:t._events[s].push(a):(t._events[s]=a,t._eventsCount++),t}function s(t,e){0==--t._eventsCount?t._events=new i:delete t._events[e]}function c(){this._events=new i,this._eventsCount=0}Object.create&&(i.prototype=Object.create(null),(new i).__proto__||(r=!1)),c.prototype.eventNames=function(){var t,e,n=[];if(0===this._eventsCount)return n;for(e in t=this._events)o.call(t,e)&&n.push(r?e.slice(1):e);return Object.getOwnPropertySymbols?n.concat(Object.getOwnPropertySymbols(t)):n},c.prototype.listeners=function(t,e){var n=r?r+t:t,o=this._events[n];if(e)return!!o;if(!o)return[];if(o.fn)return[o.fn];for(var i=0,a=o.length,s=new Array(a);i<a;i++)s[i]=o[i].fn;return s},c.prototype.emit=function(t,e,n,o,i,a){var s=r?r+t:t;if(!this._events[s])return!1;var c,u,l=this._events[s],f=arguments.length;if(l.fn){switch(l.once&&this.removeListener(t,l.fn,void 0,!0),f){case 1:return l.fn.call(l.context),!0;case 2:return l.fn.call(l.context,e),!0;case 3:return l.fn.call(l.context,e,n),!0;case 4:return l.fn.call(l.context,e,n,o),!0;case 5:return l.fn.call(l.context,e,n,o,i),!0;case 6:return l.fn.call(l.context,e,n,o,i,a),!0}for(u=1,c=new Array(f-1);u<f;u++)c[u-1]=arguments[u];l.fn.apply(l.context,c)}else{var p,d=l.length;for(u=0;u<d;u++)switch(l[u].once&&this.removeListener(t,l[u].fn,void 0,!0),f){case 1:l[u].fn.call(l[u].context);break;case 2:l[u].fn.call(l[u].context,e);break;case 3:l[u].fn.call(l[u].context,e,n);break;case 4:l[u].fn.call(l[u].context,e,n,o);break;default:if(!c)for(p=1,c=new Array(f-1);p<f;p++)c[p-1]=arguments[p];l[u].fn.apply(l[u].context,c)}}return!0},c.prototype.on=function(t,e,n){return a(this,t,e,n,!1)},c.prototype.once=function(t,e,n){return a(this,t,e,n,!0)},c.prototype.removeListener=function(t,e,n,o){var i=r?r+t:t;if(!this._events[i])return this;if(!e)return s(this,i),this;var a=this._events[i];if(a.fn)a.fn!==e||o&&!a.once||n&&a.context!==n||s(this,i);else{for(var c=0,u=[],l=a.length;c<l;c++)(a[c].fn!==e||o&&!a[c].once||n&&a[c].context!==n)&&u.push(a[c]);u.length?this._events[i]=1===u.length?u[0]:u:s(this,i)}return this},c.prototype.removeAllListeners=function(t){var e;return t?(e=r?r+t:t,this._events[e]&&s(this,e)):(this._events=new i,this._eventsCount=0),this},c.prototype.off=c.prototype.removeListener,c.prototype.addListener=c.prototype.on,c.prototype.setMaxListeners=function(){return this},c.prefixed=r,e.default=c},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0);!function(t){for(var n in t)e.hasOwnProperty(n)||(e[n]=t[n])}(n(0));var a="undefined"==typeof window?{}:window;e.isUneedWebView=a.isUneedWebView||a.navigator&&a.navigator.userAgent&&a.navigator.userAgent.indexOf("UneedWebView");var s=a.navigator.userAgent,c=a.androidBridge||/UNWebView\/android/.test(s),u=(c&&/UNWebView\/android\/lowLevelBridge/.test(s),function(t){function e(){var e=t.call(this)||this;return a.onNativeMessage=function(t){return e.handleNativeResponse(t)},a.onNativeEvent=function(t,n){return e.handleNativeEvent(t,n)},a.onModuleEvent=function(t,n,o){return e.handleModuleEvent(t,n,o)},a.callJS=function(t){return e.callJS(t)},e}return r(e,t),e.prototype.callNativeInternal=function(t){if(c){var e=JSON.stringify(t);return a.androidBridge.exec(e)}if(a.webkit&&a.webkit.messageHandlers)return a.webkit.messageHandlers.defaultHandler.postMessage(t);if(a.UIWebViewJSBridge)return a.UIWebViewJSBridge.callNative(JSON.stringify(t));var n=document.createElement("iframe");n.style.width="1px",n.style.height="1px",n.style.display="none",n.src="yunijs://callNative?args="+JSON.stringify(t),document.body.appendChild(n),setTimeout(function(){n.remove()},100)},e.prototype.callNativeInternalSync=function(t){},e}(i.Native));e.WebViewNative=u,e.native=new u,e.nativeEvent=e.native.nativeEvent,i.setNativeImplement(e.native)},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(5),r=n(3),i=n(2),a=n(1),s=window;s.JSBridge=o,Object.assign(s.JSBridge,r),Object.assign(s.JSBridge,i),Object.assign(s.JSBridge,a)}]);
-/**
+
+!function(t){var e={};function n(o){if(e[o])return e[o].exports;var r=e[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,n),r.l=!0,r.exports}n.m=t,n.c=e,n.d=function(t,e,o){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:o})},n.r=function(t){Object.defineProperty(t,"__esModule",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=6)}([function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i,a=n(4),s={};function c(){return i}e.setNativeImplement=function(t){i=t},e.getNative=c,e.addJSModule=function(t,e){s[t]=e};var u=function(){function t(){var t=this;this.nativeEvent=new a.default,this._idSeed=1,this._handles={},this._jsModules={},Object.keys(s).forEach(function(e){var n=s[e];t.addJSModule(e,n)})}return t.prototype._genHandleId=function(){return"BridgeHandle_"+this._idSeed++},t.prototype.callNative=function(t){var e=this;return new Promise(function(n,o){var r=t.handleId||e._genHandleId();e._handles[r]=function(t){200===t.ec?n(t):o(t)},t.handleId=r,e.callNativeInternal(t)})},t.prototype.callNativeFlat=function(t,e,n){return this.callNative({module:t,method:e,args:n||{}})},t.prototype.callNativeSync=function(t,e,n){return this.callNativeInternalSync({module:t,method:e,args:n})},t.prototype.callJS=function(t){var e=this,n=this._jsModules[t.module][t.method](t.args);Promise.resolve(n).then(function(n){e.callNative({module:"JSCallback",method:"callback",handleId:t.handleId,args:n})})},t.prototype.addJSModule=function(t,e){this._jsModules[t]=e},t.prototype.handleNativeResponse=function(t){var e=this._handles[t.handleId];e&&(delete this._handles[t.handleId],e(t))},t.prototype.handleNativeEvent=function(t,e){this.nativeEvent.emit(t,e)},t.prototype.handleModuleEvent=function(t,e,n){this._jsModules[t].emit(e,n)},t}();e.Native=u;var l=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),Object.defineProperty(e.prototype,"native",{get:function(){return c()},enumerable:!0,configurable:!0}),e}(a.default);e.ModuleBase=l},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0),a=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),e.prototype.post=function(t){return this.native.callNativeFlat("Analysis","post",t)},e}(i.ModuleBase);e.AnalysisModule=a,e.Analysis=new a,i.addJSModule("Analysis",e.Analysis)},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0),a=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),e.prototype.actionSheet=function(t){return this.native.callNativeFlat("UI","actionSheet",{items:t})},e.prototype.toast=function(t){return"string"==typeof t&&(t={message:t}),this.native.callNativeFlat("UI","toast",t)},e.prototype.alert=function(t){return"string"==typeof t?this.native.callNativeFlat("UI","alert",{message:t}):this.native.callNativeFlat("UI","alert",t)},e.prototype.confirm=function(t){return"string"==typeof t?this.native.callNativeFlat("UI","confirm",{message:t}):this.native.callNativeFlat("UI","confirm",t)},e.prototype.input=function(t){return void 0===t&&(t=16),this.native.callNativeFlat("UI","input",{maxLength:t})},e.prototype.showLoading=function(t){this.native.callNativeFlat("UI","showLoading",{title:t})},e.prototype.hideLoading=function(){this.native.callNativeFlat("UI","hideLoading")},e}(i.ModuleBase);e.UIModule=a,e.UI=new a,i.addJSModule("UI",e.UI)},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0),a=function(t){function e(){return null!==t&&t.apply(this,arguments)||this}return r(e,t),e.prototype.download=function(t){var e=t;return Array.isArray(t)&&(e={items:t}),this.native.callNative({module:"Browser",method:"download",args:e})},e.prototype.saveToSystemAlbum=function(t){return this.native.callNative({module:"Browser",method:"saveToSystemAlbum",args:t})},e}(i.ModuleBase);e.BrowserModule=a,e.Browser=new a,i.addJSModule("Browser",e.Browser)},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=Object.prototype.hasOwnProperty,r="~";function i(){}function a(t,e,n,o,i){var a=new function(t,e,n){this.fn=t,this.context=e,this.once=n||!1}(n,o||t,i),s=r?r+e:e;return t._events[s]?t._events[s].fn?t._events[s]=[t._events[s],a]:t._events[s].push(a):(t._events[s]=a,t._eventsCount++),t}function s(t,e){0==--t._eventsCount?t._events=new i:delete t._events[e]}function c(){this._events=new i,this._eventsCount=0}Object.create&&(i.prototype=Object.create(null),(new i).__proto__||(r=!1)),c.prototype.eventNames=function(){var t,e,n=[];if(0===this._eventsCount)return n;for(e in t=this._events)o.call(t,e)&&n.push(r?e.slice(1):e);return Object.getOwnPropertySymbols?n.concat(Object.getOwnPropertySymbols(t)):n},c.prototype.listeners=function(t,e){var n=r?r+t:t,o=this._events[n];if(e)return!!o;if(!o)return[];if(o.fn)return[o.fn];for(var i=0,a=o.length,s=new Array(a);i<a;i++)s[i]=o[i].fn;return s},c.prototype.emit=function(t,e,n,o,i,a){var s=r?r+t:t;if(!this._events[s])return!1;var c,u,l=this._events[s],f=arguments.length;if(l.fn){switch(l.once&&this.removeListener(t,l.fn,void 0,!0),f){case 1:return l.fn.call(l.context),!0;case 2:return l.fn.call(l.context,e),!0;case 3:return l.fn.call(l.context,e,n),!0;case 4:return l.fn.call(l.context,e,n,o),!0;case 5:return l.fn.call(l.context,e,n,o,i),!0;case 6:return l.fn.call(l.context,e,n,o,i,a),!0}for(u=1,c=new Array(f-1);u<f;u++)c[u-1]=arguments[u];l.fn.apply(l.context,c)}else{var p,d=l.length;for(u=0;u<d;u++)switch(l[u].once&&this.removeListener(t,l[u].fn,void 0,!0),f){case 1:l[u].fn.call(l[u].context);break;case 2:l[u].fn.call(l[u].context,e);break;case 3:l[u].fn.call(l[u].context,e,n);break;case 4:l[u].fn.call(l[u].context,e,n,o);break;default:if(!c)for(p=1,c=new Array(f-1);p<f;p++)c[p-1]=arguments[p];l[u].fn.apply(l[u].context,c)}}return!0},c.prototype.on=function(t,e,n){return a(this,t,e,n,!1)},c.prototype.once=function(t,e,n){return a(this,t,e,n,!0)},c.prototype.removeListener=function(t,e,n,o){var i=r?r+t:t;if(!this._events[i])return this;if(!e)return s(this,i),this;var a=this._events[i];if(a.fn)a.fn!==e||o&&!a.once||n&&a.context!==n||s(this,i);else{for(var c=0,u=[],l=a.length;c<l;c++)(a[c].fn!==e||o&&!a[c].once||n&&a[c].context!==n)&&u.push(a[c]);u.length?this._events[i]=1===u.length?u[0]:u:s(this,i)}return this},c.prototype.removeAllListeners=function(t){var e;return t?(e=r?r+t:t,this._events[e]&&s(this,e)):(this._events=new i,this._eventsCount=0),this},c.prototype.off=c.prototype.removeListener,c.prototype.addListener=c.prototype.on,c.prototype.setMaxListeners=function(){return this},c.prefixed=r,e.default=c},function(t,e,n){"use strict";var o,r=this&&this.__extends||(o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])},function(t,e){function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)});Object.defineProperty(e,"__esModule",{value:!0});var i=n(0);!function(t){for(var n in t)e.hasOwnProperty(n)||(e[n]=t[n])}(n(0));var a="undefined"==typeof window?{}:window;e.isUneedWebView=a.isUneedWebView||a.navigator&&a.navigator.userAgent&&a.navigator.userAgent.indexOf("UneedWebView");var s=a.navigator.userAgent,c=a.androidBridge||/UNWebView\/android/.test(s),u=(c&&/UNWebView\/android\/lowLevelBridge/.test(s),function(t){function e(){var e=t.call(this)||this;return a.onNativeMessage=function(t){return e.handleNativeResponse(t)},a.onNativeEvent=function(t,n){return e.handleNativeEvent(t,n)},a.onModuleEvent=function(t,n,o){return e.handleModuleEvent(t,n,o)},a.callJS=function(t){return e.callJS(t)},e}return r(e,t),e.prototype.callNativeInternal=function(t){if(c){var e=JSON.stringify(t);return a.androidBridge.exec(e)}if(a.webkit&&a.webkit.messageHandlers)return a.webkit.messageHandlers.defaultHandler.postMessage(t);if(a.UIWebViewJSBridge)return a.UIWebViewJSBridge.callNative(JSON.stringify(t));var n=document.createElement("iframe");n.style.width="1px",n.style.height="1px",n.style.display="none",n.src="yunijs://callNative?args="+JSON.stringify(t),document.body.appendChild(n),setTimeout(function(){n.remove()},100)},e.prototype.callNativeInternalSync=function(t){},e}(i.Native));e.WebViewNative=u,e.native=new u,e.nativeEvent=e.native.nativeEvent,i.setNativeImplement(e.native)},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(5),r=n(3),i=n(2),a=n(1),s=window;s.JSBridge=o,Object.assign(s.JSBridge,r),Object.assign(s.JSBridge,i),Object.assign(s.JSBridge,a)}]);
+
+/**
  * 这里是inject.js 核心代码部分，主要完成以下事情：
  * 1. 加载jquery.js
  * 2. 同时加载匹配的css/js
@@ -287,7 +290,8 @@
         return tag;
     }
 })();
-/**
+
+/**
  * 这里写一些针对dom元素解析和监听的通用作法
  */
 (function() {
@@ -409,7 +413,8 @@
   }
 
 })();
-/**
+
+/**
  * 这里编写一些高级用法，可以快速完成一套动作（跟踪/查找url/显示下载按钮/显示popup)
  */
 (function() {
@@ -474,7 +479,8 @@
   }
 
 })();
-(function() {
+
+(function() {
 
     // 在这里提供通用的一些检查元素的方法
     function trackDOMElements(selector, callback) {
@@ -595,7 +601,8 @@
 
 })();
 
-// 这里实现长按一张图保存的情况
+
+// 这里实现长按一张图保存的情况
 
 YNBrowser.ready(function() {
 
@@ -610,17 +617,20 @@ YNBrowser.ready(function() {
   }
 
   // 目前先为这个网站开放测试
-  if (location.host.indexOf('unsplash.com') === -1) {
-    return
-  }
+  // if (location.host.indexOf('unsplash.com') === -1) {
+  //   return
+  // }
 
   documentLongpress(function(element) {
     // 检测到图片
-    let url = getUrl(element)
+    let url = getUrl(element);
+    if(!url || !url.startsWith('http')){//加入没有获取到url
+        return;
+    }
     JSBridge.UI.actionSheet([{
-      text: '保存到云相册（推荐）',
+      text: '保存到云相册',
       action: 'album'
-    }, 
+    }
     // {
     //   text: '保存到本地',
     //   action: 'system'
@@ -640,14 +650,58 @@ YNBrowser.ready(function() {
 
   // 这里定义如何longpress
   function documentLongpress(callback) {
-    document.addEventListener('touchstart', function() {
-      callback()
-    })
+    document.addEventListener('scroll',touchFn)
+    document.addEventListener('touchmove',touchFn)
+    document.addEventListener('touchend',touchFn)
+    document.addEventListener('touchstart',touchFn)
+    document.addEventListener('touchcancel',touchFn)
+    var timeOutEvent=0;
+    var startX=0;
+    var startY=0;
+    function touchFn(e){
+        switch (e.type){
+            case "touchstart" :  //500ms之后执行
+                if(e.touches && e.touches.length==1){
+                    startX=e.touches[0].pageX
+                    startY=e.touches[0].pageY
+                    timeOutEvent = setTimeout(()=>{
+                        callback(e)
+                    },500)
+                }else{
+                    clearTimeout(timeOutEvent)
+                }
+                break;
+            default:
+                if(e.changedTouches&&e.changedTouches.length&&e.type!=='touchend'){
+                    var moveX=e.changedTouches[0].pageX
+                    var moveY=e.changedTouches[0].pageY
+                    if(Math.abs(moveX-startX)>10||Math.abs(moveY-startY)>10){
+                        clearTimeout(timeOutEvent)
+                    }
+                }else{
+                    clearTimeout(timeOutEvent)
+                }
+                break;
+        }
+    }
   }
 
   // 这里定义通过一个element找到可以保存的图片
   function getUrl(element) {
-    return 'https://www.uneed.com/source/img/logo.png'
+    var url='';
+    var tag=element.target;
+    if(element&&tag){
+        var bg=jQuery(tag).css("backgroundImage");
+        var img=jQuery(tag).attr("src");
+        if(img && typeof img==='string'){
+            url=img
+        }else if(bg && typeof bg==='string'){
+            url=YNBrowser.bgImgUrl(bg);
+        }
+        if(url.startsWith('//') ){
+            url = 'http:' + url;
+        }
+    }
+    return url;
   }
-
 })
