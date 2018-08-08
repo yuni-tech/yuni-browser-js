@@ -12,10 +12,10 @@ YNBrowser.ready(function() {
     return
   }
 
-  // 目前先为这个网站开放测试
-  // if (location.host.indexOf('unsplash.com') === -1) {
-  //   return
-  // }
+  // 目前屏蔽这个网站
+  if (location.host.indexOf('m.58pic.com') !== -1) {//千图网文字乱码
+    return
+  }
 
   documentLongpress(function(element) {
     // 检测到图片
@@ -55,14 +55,17 @@ YNBrowser.ready(function() {
     var startX=0;
     var startY=0;
     function touchFn(e){
+        jQuery(e.target).css({'-webkit-touch-callout':'none','-webkit-user-select':'none','-khtml-user-select':'none','-moz-user-select':'none','-ms-user-select':'none','user-select':'none'});
         switch (e.type){
             case "touchstart" :  //500ms之后执行
                 if(e.touches && e.touches.length==1){
                     startX=e.touches[0].pageX
                     startY=e.touches[0].pageY
                     timeOutEvent = setTimeout(()=>{
+                        e.preventDefault();
+                        e.stopPropagation();
                         callback(e)
-                    },500)
+                    },450)
                 }else{
                     clearTimeout(timeOutEvent)
                 }
