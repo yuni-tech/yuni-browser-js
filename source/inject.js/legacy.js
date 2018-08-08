@@ -56,6 +56,7 @@
     var savedatas = jQuery(event.target).data("savedatas");
     console.log("我要准备下载了...",savedatas);
     JSBridge.Browser.download(savedatas)
+    YNBrowser.clickAnalysis(location.hostname);
     return false;
   }
   window.YNBrowser.downImg = downImg //下载事件

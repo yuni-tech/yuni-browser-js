@@ -18,10 +18,11 @@
         $('body').append('<div class="yuni-download-tool"><button class="yuni-download-btn">下载到与你相册</button></div>')
         var downloadBtn = $('.yuni-download-btn')
         downloadBtn.click(function() {
-            JSBridge.Browser.download({
+            ({
                 // 图片URL格式：//wallpapers.wallhaven.cc/wallpapers/full/wallhaven-212126.jpg
                 url: 'https:' + $('#wallpaper').attr('src')
             }).then((resp) => {})
+            YNBrowser.clickAnalysis(location.hostname);
         })
     }
 

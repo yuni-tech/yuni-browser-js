@@ -167,6 +167,7 @@
         console.log(options)
         if (typeof options === 'string') {//单图下载无desc
             JSBridge.Browser.download({ url: options })
+            clickAnalysis(location.hostname);
         }
         else if (Object.prototype.toString.call(options) === '[object Array]') {
             var items = []
@@ -193,6 +194,7 @@
                 items.push(item)
             }
             JSBridge.Browser.download(items)
+            clickAnalysis(location.hostname);
         }
         else if (typeof options === 'object') {
             if (!options.url) {
@@ -208,6 +210,7 @@
                 return
             }
             JSBridge.Browser.download(options)
+            clickAnalysis(location.hostname);
         } 
     }
     YNBrowser.bgImgUrl=function(tag){//处理图片为背景图片
@@ -215,4 +218,39 @@
         tag = tag ? tag[2] : "";
         return tag;
     }
+    function versionCompare(a, b){//比较版本号 版本号a>=b
+        let result;
+        var pre = a.split('.')
+        var after = b.split('.')
+        let len = pre.length > after.length ? pre.length : after.length
+        for(let i = 0; i < len; i++ ){
+            let preInt = parseInt(pre[i]) || 0
+            let afterInt = parseInt(after[i]) || 0
+            if(preInt > afterInt){
+                result = 1
+                break
+            }else if(preInt < afterInt){
+                result = -1
+                break
+            }else{
+                if(i == len-1){
+                    result = 0
+                }
+            }
+        }
+        return result >= 0
+    }
+    function clickAnalysis(host) {//统计点击host
+        if( window.YUNI_VERSION && versionCompare(window.YUNI_VERSION,'2.6.0')){
+            JSBridge.Analysis.post({
+                eventId: 'browser.save.click',
+                eventLabel: host
+            }).then(function (res) {
+                console.log('res:', res)
+            }).catch(function (err) {
+                console.error(err)
+            })
+        }
+    }
+    YNBrowser.clickAnalysis = clickAnalysis
 })();
