@@ -289,30 +289,8 @@
         tag = tag ? tag[2] : "";
         return tag;
     }
-    function versionCompare(a, b){//比较版本号 版本号a>=b
-        let result;
-        var pre = a.split('.')
-        var after = b.split('.')
-        let len = pre.length > after.length ? pre.length : after.length
-        for(let i = 0; i < len; i++ ){
-            let preInt = parseInt(pre[i]) || 0
-            let afterInt = parseInt(after[i]) || 0
-            if(preInt > afterInt){
-                result = 1
-                break
-            }else if(preInt < afterInt){
-                result = -1
-                break
-            }else{
-                if(i == len-1){
-                    result = 0
-                }
-            }
-        }
-        return result >= 0
-    }
     function clickAnalysis(host) {//统计点击host
-        if( window.YUNI_VERSION && versionCompare(window.YUNI_VERSION,'2.6.0')){
+        if( window.YUNI_VERSION && YNBrowser.compareVersion(window.YUNI_VERSION,'2.6.0')>=0){
             JSBridge.Analysis.post({
                 eventId: 'browser.save.click',
                 eventLabel: host
