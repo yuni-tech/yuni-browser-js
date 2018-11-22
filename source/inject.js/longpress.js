@@ -32,7 +32,7 @@ YNBrowser.ready(function() {
     //   action: 'system'
     // }
     ]).then(function(resp) {
-      switch(resp.data) {
+      switch(resp) {
         case 'album':
           YNBrowser.save(url)
           break
