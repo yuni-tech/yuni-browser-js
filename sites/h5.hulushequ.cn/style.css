@@ -1,0 +1,9 @@
+.affix,
+.comments,
+.open-app,
+.recommends {
+    display: none !important;
+}
+.yn-save-popup {
+    z-index: 100000;
+}
