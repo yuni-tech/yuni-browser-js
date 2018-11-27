@@ -1,0 +1,10 @@
+/* .affix,
+.comments,*/
+/* .open-app, .affix-btn,
+.comments,.recommends {
+    display: none !important;
+} */
+.yn-save-popup,.yuni-down-one {
+    z-index: 100000;
+    margin-bottom:1.6rem;
+}
